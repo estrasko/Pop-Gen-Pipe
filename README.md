@@ -7,12 +7,14 @@ Scripts useful for general population genomics workflows.
 - use a container 
 - collaborate using git to create the pipeline
 - test the pipeline using ~3 pop gen datasets
+### End Goal: Produce quality figures and analyses results reproducable for publication
 
 ### Assembly
 - STACKS
 - populations
 
 ### Analysis using multiple SNPs per locus
+- Population summary statistics (from STACKS)
 - AMOVA
 - DAPC
 - IBD
