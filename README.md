@@ -1,6 +1,6 @@
 # Population Genomics Pipeline
 
-Scripts useful for general population genomics workflows.
+Scripts useful for general population genomics workflows - Work in progress
 
 ## Project goals
 - reproducible population genomics assembly and analysis
