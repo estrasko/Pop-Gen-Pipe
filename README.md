@@ -3,6 +3,11 @@
 Scripts useful for general population genomics workflows.
 
 ## Project goals
+In this project, we will write a script that streamlines our commonly used population genomics analyses into a clean 
+pipeline. We know how to run the individual analyses. Our goal is to learn how to connect them together in a way 
+that allows us to work faster using Python commands throughout to connect and guide the pipeline.
+
+Goals:
 - reproducible population genomics assembly and analysis
 - use a container 
 - collaborate using git to create the pipeline
