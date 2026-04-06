@@ -1,0 +1,98 @@
+### divmigrate
+setwd("C:/R Folder")
+
+devtools::install_github("kkeenan02/diveRsity")
+
+library(diveRsity)
+
+# for genepop file: use multiple SNPs per locus dataset
+
+results <- divMigrate(infile = "populations.snps.gen",
+                      stat = "gst",      # You can also try "gst" or "D" or "Nm"
+                      plot_network = TRUE,
+                      outfile = "divMigrate_output",
+                      boots = 1000)      # Optional: for bootstrapping
+
+
+# Migration matrix (relative Nm values)
+write.csv(results$nmRelMig, "gst_matrix.csv")
+
+# Asymmetric significant migration (TRUE/FALSE matrix)
+write.csv(results$nmRelMigSig, "gst_asymmetry_significance.csv")
+
+# Optional: Save Gst or D if you used those
+# write.csv(results$gst, "gst_matrix.csv")
+# write.csv(results$D, "D_matrix.csv")
+
+###############################################################################
+### when size of the window is an issue, use the following:
+
+library(diveRsity)
+library(qgraph)
+
+## 0 ── run divMigrate once (fast: no plot, no bootstraps) -----------------
+rel <- divMigrate("populations.snps.gen",
+                  stat         = "gst",
+                  plot_network = FALSE,
+                  boots        = 0)
+
+gmat <- rel$gRelMig
+diag(gmat) <- NA
+
+## 1 ── set up plotting margins and qgraph call ---------------------------
+plotFun <- function(filefun, filename, width, height, res = 300) {
+  filefun(filename, width = width, height = height, res = res, units = "px")
+  par(mar = c(6,10,6,6), xpd = NA)        # ← wide left margin, no clipping
+  qgraph(gmat,
+         nodeNames   = c("Buxahatchee","Ohatchee","Choccolocco","Coosa"),
+         legend      = TRUE,
+         posCol      = "darkblue",
+         edge.labels = TRUE,
+         curve       = 2.5,
+         mar         = c(2,10,6,6))       # match qgraph’s own margins
+  dev.off()
+}
+
+## 2 ── make all three publication-quality files --------------------------
+# PDF (vector: perfect for journals)
+pdf("migration_network.pdf", width = 8, height = 6, useDingbats = FALSE)
+par(mar = c(6,10,6,6), xpd = NA)
+qgraph(gmat,
+       nodeNames   = c("Buxahatchee","Ohatchee","Choccolocco","Coosa"),
+       legend      = TRUE,
+       posCol      = "darkblue",
+       edge.labels = TRUE,
+       curve       = 2.5,
+       mar         = c(2,10,6,6))
+dev.off()
+
+# PNG 300 dpi
+plotFun(png,  "migration_network.png", 2400, 1800)
+
+# TIFF 300 dpi (lossless; many journals prefer this)
+plotFun(tiff, "migration_network.tiff", 2400, 1800)
+
+## 1 ── grab the matrix ---------------------------------------------------
+gst_mat <- rel$gRelMig        # from your previous run
+diag(gst_mat) <- NA           # keep the diagonal empty
+
+## 2 ── add readable row / column names ----------------------------------
+labs <- c("Buxahatchee","Ohatchee","Choccolocco","Coosa")
+rownames(gst_mat) <- colnames(gst_mat) <- labs
+
+## 3a ── save the square matrix (4 × 4) ----------------------------------
+write.csv(round(gst_mat, 3),           # 3-decimals
+          file = "migration_gst_matrix.csv",
+          na   = "")                   # leave blanks for NA
+
+## 3b ── *optional* tidy/long version ------------------------------------
+##      (one row per directed edge)
+library(reshape2)                      # or tidyr::pivot_longer()
+gst_long <- na.omit(
+  melt(gst_mat, varnames = c("From","To"),
+       value.name = "RelMigration")
+)
+
+write.csv(gst_long,
+          file = "migration_gst_long.csv",
+          row.names = FALSE)
