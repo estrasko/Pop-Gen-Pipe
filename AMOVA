@@ -1,0 +1,35 @@
+# Set working directory
+
+setwd("C:/R Folder")
+
+# Load popper library
+
+library(poppr)
+
+# Read in data from Multiple SNPs per locus haps.gen file
+
+coosaensis.geneid.nout = read.genepop("populations.haps.gen")
+
+# Convert genind object to a genclone object
+
+coosaensis.genclone.nout<-as.genclone(coosaensis.geneid.nout)
+
+# Amend individual names to assign them to a specific population
+
+strata(coosaensis.genclone.nout)<-(as.data.frame(coosaensis.geneid.nout$pop))
+
+
+##AMOVA
+
+coosaensis.genclone.nout
+coosaensis.genclone.nout$strata
+coosaensis.site.amova.pop = poppr.amova(coosaensis.genclone.nout, ~coosaensis.geneid.nout.pop, cutoff = 0.5, method = "ade4")
+
+####Print Results
+
+coosaensis.site.amova.pop
+
+##Randomization Test
+coosaensis.site.amova.pop.rtest<-randtest(coosaensis.site.amova.pop,nrepet = 999)
+coosaensis.site.amova.pop.rtest
+plot(coosaensis.site.amova.pop.rtest)
