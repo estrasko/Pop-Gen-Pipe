@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+
+# A script connecting population genetics analyses in R.
+
+conda activate 
+
+# create a directory
+
+mkdir pop-gen-pipe
+
+# activate R
+
+R
+
+# grab 3 files from populations output: "populations.haps.gen" from your multiple
+# SNPs per locus, "populations.snps.gen" from mutltiple SNPs per locus, and 
+# "populations.snps.gen" from single SNP per locus. NOTE: these files have the same
+# name in populations output! Rename to match below.
+
+haps.infile = "populations.haps.gen"
+multiple.infile = "populations.snps.multi.gen"
+single.infile = "populations.snps.single.gen"
+
+# add genepop converter
+
+ 
+
