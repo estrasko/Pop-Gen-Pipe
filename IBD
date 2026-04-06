@@ -1,0 +1,83 @@
+####Script for Leptoxis coosaensis project to look at IBD using Fst vs. geographical distance
+library(vegan)
+library(hierfstat)
+library(ggplot2)
+library(ecodist)
+library(adegenet)
+rm(list=ls())
+setwd("C:/R Folder")
+
+
+##Generate Pairwise Fst
+
+#Note: this was done with the multiple SNP per dataset haps file, which I think is the most robust way to calculate Fst.
+genepops<-list.files(pattern="*.genepop")
+gens<-gsub(".genepop$",".gen", genepops)
+file.rename(genepops,gens)
+
+####Uncomment if you want to calculate Weir and Cockerham Fst and use that.
+#dat<-read.genepop("melanoides_ss_m3M4n4_p5r60_maxobshet50_maf025_single.snps.gen")##Read in Genepop
+#data2<-genind2hierfstat(dat)
+#data2$pop #Sanity check to make sure populations are accurately defined.
+#WC<-pairwise.WCfst(data2,diploid = TRUE)
+#WC[is.na(WC)]<-0
+#write.table(WC,file="WC_FST.csv",row.names=FALSE, col.names = FALSE, sep = ",")
+#WC<-as.dist(WC)
+
+FST_stacks<-read.csv("STACKS_FST.csv",header=FALSE, sep = ",")
+FST_stacks
+FST_stacks<-quasieuclid(as.dist(FST_stacks))
+####MANTEL TEST###
+Distances<-read.csv("coosaensis_distances.csv", header=FALSE)
+distances<-as.matrix(Distances)
+Distances2<-quasieuclid(as.dist(Distances))
+Distances2
+ibd<-mantel.randtest(Distances2,FST_stacks, nrepet = 1000)
+plot(ibd)
+ibd
+
+
+
+###Multiple Regression on distance matrices###
+###Note to self, RDA is multivariate MRM according to Legendre et al. (2015).
+
+##Response on left. ##Fst is response.
+MRM.results<-MRM(FST_stacks ~ Distances2, method = "linear", mrank = FALSE)
+MRM.results
+
+
+help(pdf)
+pdf("plot_FST-vs-distances.pdf", width = 7, height = 4.5)
+plot(Distances2, FST_stacks)
+dev.off()
+
+
+
+##Regression on Distance from most downstream site
+
+data2<-read.csv(file = "melanoides-ss_Summary-stats.csv")
+
+##Observed Heterozygosity##
+model.obsHet<-lm(data2$Ho ~ data2$Distance)
+summary(model.obsHet)##p = 0.1649
+ggplot(data2,aes(x=data2$Distance,y=data2$Ho)) + geom_point(shape=1) +expand_limits(y=0)+geom_line(aes(x=data2$Distance,y=model.obsHet$fitted.values,color="red"))+theme(panel.background = element_blank())
+
+##Expected Heterozygosity##
+model.expHet<-lm(data2$He ~ data2$Distance)
+summary(model.expHet)##p=0.4135
+ggplot(data2,aes(x=data2$Distance,y=data2$He)) + geom_point(shape=1) +expand_limits(y=0)+geom_line(aes(x=data2$Distance,y=model.expHet$fitted.values,color="red"))+theme(panel.background = element_blank())
+
+model.pi<-lm(data2$Pi ~ data2$Distance)
+summary(model.pi)##p =0.4241
+ggplot(data2,aes(x=data2$Distance,y=data2$pi)) + geom_point(shape=1) +expand_limits(y=0)+geom_line(aes(x=data2$Distance,y=model.pi$fitted.values,color="red"))+theme(panel.background = element_blank())
+
+model.Ar<-lm(data2$AR_by_pop...2. ~data2$Distance)
+summary(model.Ar)##p=0.3975
+ggplot(data2,aes(x=data2$Distance,y=data2$AR)) + geom_point(shape=1) +expand_limits(y=0)+geom_line(aes(x=data2$Distance,y=model.Ar$fitted.values,color="red"))+theme(panel.background = element_blank())
+
+
+
+
+
+
+
