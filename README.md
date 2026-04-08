@@ -34,8 +34,8 @@ Goals:
 
 ## Conda Environment Installation
 1) Put "environment.yml" in your designated working folder
-2) Create conda environment under a new name *conda env create -f environment.yml --name Pop-Gen-PipeEnv*
-3) Activate your new environment *conda activate Pop-Gen-PipeEnv*
+2) Create conda environment under a new name: *conda env create -f environment.yml --name Pop-Gen-PipeEnv*
+3) Activate your new environment: *conda activate Pop-Gen-PipeEnv*
 
 # Feedback
 
