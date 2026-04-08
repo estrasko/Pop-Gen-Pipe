@@ -24,16 +24,11 @@ haps.infile = genind_to_genepop(haps.infile_gen)
 multiple.infile = genind_to_genepop(haps.infile_gen)
 single.infile = genind_to_genepop(haps.single.infile)
 
-# add genepop converter
-
-# AMOVA
-
+#### AMOVA ####
 # Read in data from Multiple SNPs per locus haps.gen file
-
 geneid.nout = read.genepop("populations.haps.gen")
 
 # Convert genind object to a genclone object
-
 genclone.nout<-as.genclone(geneid.nout)
 
 # Amend individual names to assign them to a specific population
