@@ -12,6 +12,9 @@ mkdir pop-gen-pipe
 
 R
 
+# libraries
+library(poppr)
+
 # grab 3 files from populations output: "populations.haps.gen" from your multiple
 # SNPs per locus, "populations.snps.gen" from mutltiple SNPs per locus, and 
 # "populations.snps.gen" from single SNP per locus. NOTE: these files have the same
@@ -23,5 +26,33 @@ single.infile = "populations.snps.single.gen"
 
 # add genepop converter
 
- 
+# AMOVA
+
+# Read in data from Multiple SNPs per locus haps.gen file
+
+geneid.nout = read.genepop("populations.haps.gen")
+
+# Convert genind object to a genclone object
+
+genclone.nout<-as.genclone(geneid.nout)
+
+# Amend individual names to assign them to a specific population
+
+strata(genclone.nout)<-(as.data.frame(geneid.nout$pop))
+
+
+##AMOVA
+
+genclone.nout
+genclone.nout$strata
+site.amova.pop = poppr.amova(genclone.nout, ~geneid.n>
+
+####Print Results
+
+site.amova.pop
+
+##Randomization Test
+site.amova.pop.rtest<-randtest(coosaensis.site.amova.pop,nrepet = 999)
+site.amova.pop.rtest
+plot(site.amova.pop.rtest)
 
