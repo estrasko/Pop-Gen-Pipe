@@ -23,9 +23,6 @@ single.infile_gen = "populations.snps.single.gen"
 haps.infile = genind_to_genepop(haps.infile_gen)
 multiple.infile = genind_to_genepop(haps.infile_gen)
 single.infile = genind_to_genepop(haps.single.infile)
-haps.infile = "populations.haps.gen"
-multiple.infile = "populations.snps.multi.gen"
-single.infile = "populations.snps.single.gen"
 
 # add genepop converter
 
