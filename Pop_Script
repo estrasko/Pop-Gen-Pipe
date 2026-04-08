@@ -22,12 +22,10 @@ single.infile_gen = "populations.snps.single.gen"
 # Convert genind objects to readable genepop text files
 haps.infile = genind_to_genepop(haps.infile_gen)
 multiple.infile = genind_to_genepop(haps.infile_gen)
-single.infile = genind_to_genepop(haps.single.infile)
+single.infile = genind_to_genepop(haps.single.infile_gen)
 
 #### AMOVA ####
-# Read in data from Multiple SNPs per locus haps.gen file
-geneid.nout = read.genepop("populations.haps.gen")
-
+# For this method we will be reading in data from Multiple SNPs per locus haps file
 # Convert genind object to a genclone object
 genclone.nout<-as.genclone(geneid.nout)
 
