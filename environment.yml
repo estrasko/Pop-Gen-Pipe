@@ -22,7 +22,6 @@ dependencies:
   - r-hierfstat
   - r-ecodist
   - r-diversity
-  - r-graph4lg
   - pip
   - pandas
   - pyyaml
