@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import logging
+import subprocess
+import sys
+from pathlib import Path
+
+
+def setup_logging(log_file: Path) -> None:
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler(sys.stdout),
+        ],
+    )
+
+
+def validate_file(path: Path, label: str) -> None:
+    if not path.exists():
+        raise FileNotFoundError(f"{label} not found: {path}")
+
+
+def make_output_dirs(outdir: Path) -> dict[str, Path]:
+    dirs = {
+        "base": outdir,
+        "logs": outdir / "logs",
+        "amova": outdir / "amova",
+        "dapc": outdir / "dapc",
+        "ibd": outdir / "ibd",
+        "divmigrate": outdir / "divmigrate",
+    }
+    for directory in dirs.values():
+        directory.mkdir(parents=True, exist_ok=True)
+    return dirs
+
+
+def run_r(script: Path, args: list[str]) -> None:
+    cmd = ["Rscript", str(script)] + args
+    logging.info("Running: %s", " ".join(cmd))
+    subprocess.run(cmd, check=True)
+
+
+def run_amova(haps: Path, popmap: Path, outdir: Path, scripts: Path):
+    run_r(scripts / "run_amova.R", [str(haps), str(popmap), str(outdir)])
+
+
+def run_dapc(snps: Path, popmap: Path, outdir: Path, scripts: Path):
+    run_r(scripts / "run_dapc.R", [str(snps), str(popmap), str(outdir)])
+
+
+def run_ibd(fst: Path, geo: Path, outdir: Path, scripts: Path):
+    run_r(scripts / "run_ibd.R", [str(fst), str(geo), str(outdir)])
+
+
+def run_divmigrate(snps: Path, outdir: Path, scripts: Path):
+    run_r(scripts / "run_divmigrate.R", [str(snps), str(outdir), "gst", "1000"])
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Pop Gen Pipeline")
+
+    parser.add_argument("--haps-genepop", required=True)
+    parser.add_argument("--multi-snp-genepop", required=True)
+    parser.add_argument("--popmap", required=True)
+    parser.add_argument("--fst-csv", required=True)
+    parser.add_argument("--geo-csv", required=True)
+    parser.add_argument("--outdir", required=True)
+    parser.add_argument("--scripts-dir", default="scripts")
+
+    parser.add_argument("--run-amova", action="store_true")
+    parser.add_argument("--run-dapc", action="store_true")
+    parser.add_argument("--run-ibd", action="store_true")
+    parser.add_argument("--run-divmigrate", action="store_true")
+
+    args = parser.parse_args()
+
+    haps = Path(args.haps_genepop)
+    snps = Path(args.multi_snp_genepop)
+    popmap = Path(args.popmap)
+    fst = Path(args.fst_csv)
+    geo = Path(args.geo_csv)
+    outdir = Path(args.outdir)
+    scripts = Path(args.scripts_dir)
+
+    dirs = make_output_dirs(outdir)
+    setup_logging(dirs["logs"] / "pipeline.log")
+
+    validate_file(haps, "Haps genepop")
+    validate_file(snps, "SNP genepop")
+    validate_file(popmap, "Popmap")
+    validate_file(fst, "Fst matrix")
+    validate_file(geo, "Geo matrix")
+
+    if args.run_amova:
+        run_amova(haps, popmap, dirs["amova"], scripts)
+
+    if args.run_dapc:
+        run_dapc(snps, popmap, dirs["dapc"], scripts)
+
+    if args.run_ibd:
+        run_ibd(fst, geo, dirs["ibd"], scripts)
+
+    if args.run_divmigrate:
+        run_divmigrate(snps, dirs["divmigrate"], scripts)
+
+    logging.info("Pipeline complete")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
