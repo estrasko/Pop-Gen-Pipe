@@ -9,7 +9,7 @@ that allows us to work faster using Python commands throughout to connect and gu
 
 Goals:
 - reproducible population genomics assembly and analysis
-- use a container 
+- use a Conda environment
 - collaborate using git to create the pipeline
 - test the pipeline using ~3 pop gen datasets
 ### End Goal: Produce quality figures and analyses results reproducable for publication
