@@ -1,4 +1,4 @@
-name: Pop-Gen-Pipe
+name: Pop-Gen-PipeEnv
 channels:
   - conda-forge
   - bioconda
@@ -23,7 +23,8 @@ dependencies:
   - r-ecodist
   - r-diversity
   - pip
-  - pandas
   - pyyaml
   - r-ggplot2
   - r-optparse
+  - pip:
+    - pandas
