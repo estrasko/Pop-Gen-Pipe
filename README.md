@@ -37,6 +37,20 @@ Goals:
 2) Create conda environment under a new name: *conda env create -f environment.yml --name Pop-Gen-PipeEnv*
 3) Activate your new environment: *conda activate Pop-Gen-PipeEnv*
 
+
+## Pop_Script outline
+- AMOVA
+    - input file
+        - columns
+        - rows
+    - functions
+    - genclone object
+    - AMOVA results
+    - Randomization Test Results
+- DAPC
+- IBD
+
+
 # Feedback
 
 You have a good start here.
