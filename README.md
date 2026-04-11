@@ -37,6 +37,17 @@ Goals:
 2) Create conda environment under a new name: *conda env create -f environment.yml --name Pop-Gen-PipeEnv*
 3) Activate your new environment: *conda activate Pop-Gen-PipeEnv*
 
+## Optional: Multithreading for divmigrate
+We created this pipeline to run on personal laptops, clusters, or whatever you have to work with. The only sometimes
+computationally expensive program is divmigrate. If no threading option is specified, the default behavior is threads = 1.
+
+Users can utilize more CPU resources by optionally flagging --threads <N>
+
+Example: 
+--run-divmigrate --threads 12
+
+Note: threading is only available in divmigrate, not the other tests. The others don't need it.
+
 # Feedback
 
 You have a good start here.
