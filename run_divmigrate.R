@@ -8,32 +8,58 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (!(length(args) %in% c(4, 5))) {
-  stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> [node_names_csv]")
+if (!(length(args) %in% c(5, 6))) {
+  stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv]")
 }
 
 input_file <- args[1]
 outdir <- args[2]
 stat <- args[3]
 boots <- as.integer(args[4])
-node_names_arg <- if (length(args) == 5) args[5] else NA
+threads <- as.integer(args[5])
+node_names_arg <- if (length(args) == 6) args[6] else NA
 
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
+if (is.na(threads) || threads < 1) {
+  stop("threads must be an integer >= 1")
+}
+
 cat("Running divMigrate...\n")
+cat(paste0("Statistic: ", stat, "\n"))
+cat(paste0("Bootstrap replicates: ", boots, "\n"))
+cat(paste0("Threads requested: ", threads, "\n"))
+
+# divMigrate accepts genepop .gen/.txt, so create a temporary .gen copy
+temp_gen_file <- tempfile(fileext = ".gen")
+file.copy(input_file, temp_gen_file, overwrite = TRUE)
+
+# The diveRsity API only exposes parallel on/off through para
+use_parallel <- threads > 1
+cat(paste0("Parallel enabled: ", use_parallel, "\n"))
+
 results <- divMigrate(
-  infile = input_file,
+  infile = temp_gen_file,
   stat = stat,
   plot_network = FALSE,
-  boots = boots
+  boots = boots,
+  para = use_parallel
 )
 
 if (!is.null(results$nmRelMig)) {
-  write.csv(results$nmRelMig, file.path(outdir, "divmigrate_nmRelMig.csv"), row.names = TRUE)
+  write.csv(
+    results$nmRelMig,
+    file.path(outdir, "divmigrate_nmRelMig.csv"),
+    row.names = TRUE
+  )
 }
 
 if (!is.null(results$nmRelMigSig)) {
-  write.csv(results$nmRelMigSig, file.path(outdir, "divmigrate_nmRelMigSig.csv"), row.names = TRUE)
+  write.csv(
+    results$nmRelMigSig,
+    file.path(outdir, "divmigrate_nmRelMigSig.csv"),
+    row.names = TRUE
+  )
 }
 
 if (!is.null(results$gRelMig)) {
@@ -75,14 +101,12 @@ pdf(
   height = 6,
   useDingbats = FALSE
 )
-par(mar = c(6, 10, 6, 6), xpd = NA)
+par(mar = c(4, 4, 4, 4), xpd = NA)
 qgraph(
   gmat,
-  nodeNames = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
-  legend = TRUE,
+  labels = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
   edge.labels = TRUE,
-  curve = 2.5,
-  mar = c(2, 10, 6, 6)
+  curve = 0.8
 )
 dev.off()
 
@@ -92,14 +116,12 @@ png(
   height = 1800,
   res = 300
 )
-par(mar = c(6, 10, 6, 6), xpd = NA)
+par(mar = c(4, 4, 4, 4), xpd = NA)
 qgraph(
   gmat,
-  nodeNames = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
-  legend = TRUE,
+  labels = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
   edge.labels = TRUE,
-  curve = 2.5,
-  mar = c(2, 10, 6, 6)
+  curve = 0.8
 )
 dev.off()
 
