@@ -116,13 +116,15 @@ Example:
 
 **NOTE: Threading is only available in divmigrate, not the other tests. The others don't need it**
 
-## Analysis of Molecular Variance (AMOVA)
+##Analyses
 
-## Discriminant Analysis of Principal Components (DAPC)
+### Analysis of Molecular Variance (AMOVA)
 
-## Isolation by Distance (IBD)
+### Discriminant Analysis of Principal Components (DAPC)
 
-## Migration Analysis (divmigrate)
+### Isolation by Distance (IBD)
+
+### Migration Analysis (divmigrate)
 Estimates directional gene flow
 
 Options:
