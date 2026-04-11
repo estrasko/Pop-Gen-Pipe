@@ -124,6 +124,26 @@ Example:
 
 Note: threading is only available in divmigrate, not the other tests. The others don't need it.
 
+## Analysis of Molecular Variance (AMOVA)
+
+## Discriminant Analysis of Principal Components (DAPC)
+
+## Isolation by Distance (IBD)
+
+## Migration Analysis (divmigrate)
+estimates directional gene flow. options:
+
+--divmigrate-stat gst
+--divmigrate-stat D
+--divmigrate-stat Nm
+
+Outputs:
+- migration matrices
+- network plots
+- summary files
+
+divmigrate is part of the diveRsity package. learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
+
 # Feedback
 
 You have a good start here.
