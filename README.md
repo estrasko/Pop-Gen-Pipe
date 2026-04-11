@@ -7,7 +7,7 @@ that allows us to work faster using Python commands throughout to connect and gu
 
 **Goals:**
 1. Create a reproducible population genomics assembly and analysis
-2. Use a Conda environment for transferable reproducability
+2. Use a Conda environment for transferable reproducibility
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use between taxa/projects
 
