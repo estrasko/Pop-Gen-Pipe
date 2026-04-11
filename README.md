@@ -13,7 +13,7 @@ that allows us to work faster using Python commands throughout to connect and gu
 
 ### End Goal: Produce quality population genomic figures and analyses results reproducable for publication
 
-## Analysis included in this pipeline (using multiple SNPs per locus datasets)
+## Analyses included in this pipeline (using multiple SNPs per locus datasets)
 - AMOVA
 - DAPC
 - IBD
@@ -21,8 +21,8 @@ that allows us to work faster using Python commands throughout to connect and gu
 
 
 ## Overview
-This pipeline uses Python as the master program handling orchestration of runs, validation, and file handling. Every analysis
-is able to be individually run as a function. The entire script is importable as a module.
+This pipeline uses Python as the master program handling orchestration of runs, validation, and file management. Every analysis
+can be run individually as a function. The entire script is importable as a module.
 
 All analyses are in the R programming language, where Python calls R for running the analyses and plotting the results.
 
@@ -45,15 +45,27 @@ graph TD;
 ```
 
 ## Installation
-1. Clone the repository: *git clone https://github.com/estrasko/Pop-Gen-Pipe.git*
-   Move to directory: *cd Pop-Gen-Pipe*
+1) Clone the repository: 
+```
+git clone https://github.com/estrasko/Pop-Gen-Pipe.git
+```
+2) Move to directory: 
+```
+cd Pop-Gen-Pipe
+```
 
 NOTE: you can also fork the repository and work that way.
 
 ### Create the Conda Environment
 1) Put "environment.yml" in your designated working folder
-2) Create conda environment under a new name: *conda env create -f environment.yml --name Pop-Gen-PipeEnv*
-3) Activate your new environment: *conda activate Pop-Gen-PipeEnv*
+2) Create conda environment under a new name: 
+```
+conda env create -f environment.yml --name Pop-Gen-PipeEnv
+```
+3) Activate your new environment: 
+```
+conda activate Pop-Gen-PipeEnv
+```
 
 ## Required Input Files
 Files are created by the *Populations* step in STACKS<sup>1 
