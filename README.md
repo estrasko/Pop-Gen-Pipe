@@ -46,26 +46,26 @@ graph TD;
 
 ## Installation
 1) Clone the repository: 
-```
-git clone https://github.com/estrasko/Pop-Gen-Pipe.git
-```
+   ```bash
+   git clone https://github.com/estrasko/Pop-Gen-Pipe.git
+   ```
 2) Move to directory: 
-```
-cd Pop-Gen-Pipe
-```
+   ```bash
+   cd Pop-Gen-Pipe
+   ```
 
 NOTE: you can also fork the repository and work that way.
 
 ### Create the Conda Environment
 1) Put "environment.yml" in your designated working folder
 2) Create conda environment under a new name: 
-```
-conda env create -f environment.yml --name Pop-Gen-PipeEnv
-```
+   ```bash
+   conda env create -f environment.yml --name Pop-Gen-PipeEnv
+   ```
 3) Activate your new environment: 
-```
-conda activate Pop-Gen-PipeEnv
-```
+   ```bash
+   conda activate Pop-Gen-PipeEnv
+   ```
 
 ## Required Input Files
 Files are created by the *Populations* step in STACKS<sup>1 
@@ -102,6 +102,7 @@ Square matrix:
 80.14,90.25,57.79,0
 
 ## Run the Pipeline
+```bash
 python Pop_script_2.py \
   --haps-genepop populations.haps.genepop \
   --multi-snp-genepop populations.snps.genepop \
@@ -114,6 +115,7 @@ python Pop_script_2.py \
   --run-dapc \
   --run-ibd \
   --run-divmigrate
+  ```
 
 **any of the above analyses under *--scripts-dir* can be removed or run individually**
 
@@ -124,7 +126,9 @@ computationally expensive program is divmigrate. If no threading option is speci
 **Users can utilize more CPU resources by optionally flagging --threads <N>**
 
 Example: 
+```bash
 --run-divmigrate --threads 12
+```
 
 **NOTE: Threading is only available in divmigrate, not the other tests. The others don't need it**
 
