@@ -5,7 +5,7 @@ In this project, we wrote a script that streamlines our most commonly used popul
 pipeline. We know how to run the analyses individually. However, our goal was to learn how to connect them together in a way 
 that allows us to work faster using Python commands throughout to connect and guide the pipeline.
 
-<u>Goals:</u>
+**Goals:**
 1. Create a reproducible population genomics assembly and analysis
 2. Use a Conda environment for transferable reproducability
 3. Collaborate using git to create the pipeline
@@ -57,6 +57,7 @@ NOTE: you can also fork the repository and work that way.
 
 ## Required Input Files
 Files are created by the *Populations* step in STACKS<sup>1 
+
 *NOTE: ALL INPUT FILES MUST BE IN SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
 and identical population order.
 
@@ -113,7 +114,7 @@ computationally expensive program is divmigrate. If no threading option is speci
 Example: 
 --run-divmigrate --threads 12
 
-Note: threading is only available in divmigrate, not the other tests. The others don't need it.
+==Threading is only available in divmigrate, not the other tests. The others don't need it==
 
 ## Analysis of Molecular Variance (AMOVA)
 
