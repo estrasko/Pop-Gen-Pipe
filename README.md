@@ -32,8 +32,8 @@ All analyses are in the R programming language, where Python calls R for running
 ```mermaid
 graph TD:
    Input data (Post STACKS Populations)-->Sample validation (Python);
-   Sample validation (Python)-->Pop Gen analyses (R)'
-   ↓
+   Sample validation (Python)-->Pop Gen analyses (R)
+```
 Pop Gen analyses (R):
    ├── AMOVA
    ├── DAPC (with cross-validation)
