@@ -1,0 +1,13 @@
+$coef
+            fst_dist  pval
+Int      0.088643211 0.606
+geo_dist 0.000924633 0.077
+
+$r.squared
+       R2      pval 
+0.7026297 0.0770000 
+
+$F.test
+       F   F.pval 
+9.451243 0.077000 
+

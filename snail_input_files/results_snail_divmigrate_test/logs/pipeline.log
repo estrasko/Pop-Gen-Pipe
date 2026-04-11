@@ -1,0 +1,94 @@
+2026-04-11 12:47:35,331 - INFO - Starting population genetics pipeline.
+2026-04-11 12:47:35,331 - INFO - Output directory: results_snail_divmigrate_test
+2026-04-11 12:47:35,331 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 12:47:35,335 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 12:47:35,335 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 12:47:35,338 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 12:47:35,338 - INFO - Running divMigrate...
+2026-04-11 12:47:35,338 - INFO - Running command: Rscript run_divmigrate.R populations.snps_multiple_SNP_per_locus_R80.genepop results_snail_divmigrate_test/divmigrate gst 1000
+2026-04-11 13:01:14,823 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 336, in main
+    run_divmigrate(
+    ~~~~~~~~~~~~~~^
+        multi_snp_genepop,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        args.divmigrate_node_names,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 193, in run_divmigrate
+    run_r_script(scripts_dir / "run_divmigrate.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 148, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_divmigrate.R', 'populations.snps_multiple_SNP_per_locus_R80.genepop', 'results_snail_divmigrate_test/divmigrate', 'gst', '1000']' returned non-zero exit status 1.
+2026-04-11 13:06:06,767 - INFO - Starting population genetics pipeline.
+2026-04-11 13:06:06,767 - INFO - Output directory: results_snail_divmigrate_test
+2026-04-11 13:06:06,767 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 13:06:06,772 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 13:06:06,772 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 13:06:06,775 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 13:06:06,775 - INFO - Running divMigrate...
+2026-04-11 13:06:06,775 - INFO - Using 12 thread(s) for divMigrate.
+2026-04-11 13:06:06,775 - INFO - Running command: Rscript run_divmigrate.R populations.snps_multiple_SNP_per_locus_R80.genepop results_snail_divmigrate_test/divmigrate gst 1000 12
+2026-04-11 13:06:07,993 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 339, in main
+    run_divmigrate(
+    ~~~~~~~~~~~~~~^
+        multi_snp_genepop,
+        ^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        args.divmigrate_node_names,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 191, in run_divmigrate
+    run_r_script(scripts_dir / "run_divmigrate.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 140, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_divmigrate.R', 'populations.snps_multiple_SNP_per_locus_R80.genepop', 'results_snail_divmigrate_test/divmigrate', 'gst', '1000', '12']' returned non-zero exit status 1.
+2026-04-11 13:11:06,457 - INFO - Starting population genetics pipeline.
+2026-04-11 13:11:06,458 - INFO - Output directory: results_snail_divmigrate_test
+2026-04-11 13:11:06,458 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 13:11:06,476 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 13:11:06,476 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 13:11:06,480 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 13:11:06,480 - INFO - Running divMigrate...
+2026-04-11 13:11:06,480 - INFO - Using 12 thread(s) for divMigrate.
+2026-04-11 13:11:06,480 - INFO - Running command: Rscript run_divmigrate.R populations.snps_multiple_SNP_per_locus_R80.genepop results_snail_divmigrate_test/divmigrate gst 1000 12
+2026-04-11 13:12:42,018 - INFO - Pipeline completed successfully.
+2026-04-11 13:20:06,630 - INFO - Starting population genetics pipeline.
+2026-04-11 13:20:06,631 - INFO - Output directory: results_snail_divmigrate_test
+2026-04-11 13:20:06,631 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 13:20:06,639 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 13:20:06,639 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 13:20:06,642 - INFO - Wrote corrected popmap to: results_snail_divmigrate_test/popmap_corrected.csv
+2026-04-11 13:20:06,642 - INFO - Running IBD...
+2026-04-11 13:20:06,642 - INFO - Running command: Rscript run_ibd.R snail_input_files/fst.csv snail_input_files/geo.csv results_snail_divmigrate_test/ibd
+2026-04-11 13:20:07,652 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 334, in main
+    run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 175, in run_ibd
+    run_r_script(scripts_dir / "run_ibd.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 140, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_ibd.R', 'snail_input_files/fst.csv', 'snail_input_files/geo.csv', 'results_snail_divmigrate_test/ibd']' returned non-zero exit status 1.

@@ -1,0 +1,55 @@
+2026-04-11 12:47:01,623 - INFO - Starting population genetics pipeline.
+2026-04-11 12:47:01,623 - INFO - Output directory: results_snail_ibd_test
+2026-04-11 12:47:01,623 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 12:47:01,628 - INFO - Wrote corrected popmap to: results_snail_ibd_test/popmap_corrected.csv
+2026-04-11 12:47:01,628 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 12:47:01,631 - INFO - Wrote corrected popmap to: results_snail_ibd_test/popmap_corrected.csv
+2026-04-11 12:47:01,631 - INFO - Running IBD...
+2026-04-11 12:47:01,631 - INFO - Running command: Rscript run_ibd.R snail_input_files/fst.csv snail_input_files/geo.csv results_snail_ibd_test/ibd
+2026-04-11 12:47:02,570 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 332, in main
+    run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 178, in run_ibd
+    run_r_script(scripts_dir / "run_ibd.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 148, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_ibd.R', 'snail_input_files/fst.csv', 'snail_input_files/geo.csv', 'results_snail_ibd_test/ibd']' returned non-zero exit status 1.
+2026-04-11 13:28:31,125 - INFO - Starting population genetics pipeline.
+2026-04-11 13:28:31,126 - INFO - Output directory: results_snail_ibd_test
+2026-04-11 13:28:31,126 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 13:28:31,139 - INFO - Wrote corrected popmap to: results_snail_ibd_test/popmap_corrected.csv
+2026-04-11 13:28:31,139 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 13:28:31,143 - INFO - Wrote corrected popmap to: results_snail_ibd_test/popmap_corrected.csv
+2026-04-11 13:28:31,143 - INFO - Running IBD...
+2026-04-11 13:28:31,143 - INFO - Running command: Rscript run_ibd.R snail_input_files/fst.csv snail_input_files/geo.csv results_snail_ibd_test/ibd
+2026-04-11 13:28:32,343 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 334, in main
+    run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 175, in run_ibd
+    run_r_script(scripts_dir / "run_ibd.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 140, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_ibd.R', 'snail_input_files/fst.csv', 'snail_input_files/geo.csv', 'results_snail_ibd_test/ibd']' returned non-zero exit status 1.
+2026-04-11 13:30:06,829 - INFO - Starting population genetics pipeline.
+2026-04-11 13:30:06,830 - INFO - Output directory: results_snail_ibd_test
+2026-04-11 13:30:06,830 - INFO - Validating popmap against multi-SNP genepop file: populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-11 13:30:06,856 - INFO - Wrote corrected popmap to: results_snail_ibd_test/popmap_corrected.csv
+2026-04-11 13:30:06,856 - INFO - Validating popmap against haplotype genepop file: populations.haps.genepop
+2026-04-11 13:30:06,866 - INFO - Wrote corrected popmap to: results_snail_ibd_test/popmap_corrected.csv
+2026-04-11 13:30:06,866 - INFO - Running IBD...
+2026-04-11 13:30:06,866 - INFO - Running command: Rscript run_ibd.R snail_input_files/fst.csv snail_input_files/geo.csv results_snail_ibd_test/ibd
+2026-04-11 13:30:08,232 - INFO - Pipeline completed successfully.

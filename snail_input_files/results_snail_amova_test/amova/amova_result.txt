@@ -1,0 +1,23 @@
+$call
+ade4::amova(samples = xtab, distances = xdist, structures = xstruct)
+
+$results
+                                   Df    Sum Sq    Mean Sq
+Between Population                  3  85199.26 28399.7545
+Between samples Within Population  67  45038.26   672.2129
+Within samples                     71  66643.41   938.6396
+Total                             141 196880.93  1396.3187
+
+$componentsofcovariance
+                                                  Sigma          %
+Variations  Between Population                 787.4622  49.436118
+Variations  Between samples Within Population -133.2133  -8.363006
+Variations  Within samples                     938.6396  58.926888
+Total variations                              1592.8884 100.000000
+
+$statphi
+                              Phi
+Phi-samples-total       0.4107311
+Phi-samples-Population -0.1653949
+Phi-Population-total    0.4943612
+
