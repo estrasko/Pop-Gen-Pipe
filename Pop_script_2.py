@@ -49,10 +49,10 @@ def extract_genepop_sample_names(genepop_path: Path) -> list[str]:
     """
     Extract sample names from a GENEPOP file.
 
-    Assumes sample lines contain a comma, where the sample name is the text
-    before the first comma.
+    Ignore header/locus lines and only start reading after the first POP line.
     """
     sample_names: list[str] = []
+    in_pop_section = False
 
     with genepop_path.open("r", encoding="utf-8") as handle:
         for raw_line in handle:
@@ -61,11 +61,13 @@ def extract_genepop_sample_names(genepop_path: Path) -> list[str]:
             if not line:
                 continue
 
-            # Skip POP lines
             if line.upper() == "POP":
+                in_pop_section = True
                 continue
 
-            # In genepop, individual/sample lines contain a comma
+            if not in_pop_section:
+                continue
+
             if "," in line:
                 sample_name = line.split(",", 1)[0].strip()
                 sample_names.append(sample_name)
@@ -85,10 +87,8 @@ def validate_and_fix_popmap(
     label: str,
 ) -> Path:
     """
-    Validate that the popmap Sample column matches the genepop sample names,
-    reorder the popmap to match the genepop order, and write a corrected copy.
-
-    Returns the path to the corrected popmap CSV.
+    Validate popmap sample names against a genepop file, reorder popmap to match,
+    and write a corrected copy.
     """
     logging.info("Validating popmap against %s genepop file: %s", label, genepop_path)
 
@@ -101,9 +101,7 @@ def validate_and_fix_popmap(
         )
 
     if "Population" not in popmap_df.columns:
-        raise ValueError(
-            "Popmap must contain a 'Population' column."
-        )
+        raise ValueError("Popmap must contain a 'Population' column.")
 
     popmap_samples = popmap_df["Sample"].astype(str).tolist()
 
@@ -120,7 +118,6 @@ def validate_and_fix_popmap(
             f"Missing in genepop: {missing_in_genepop}"
         )
 
-    # Reorder popmap to match genepop sample order
     corrected_df = (
         popmap_df.assign(Sample=popmap_df["Sample"].astype(str))
         .set_index("Sample")
@@ -151,7 +148,12 @@ def run_amova(haps_genepop: Path, popmap: Path, outdir: Path, scripts_dir: Path)
     )
 
 
-def run_dapc(multi_snp_genepop: Path, popmap: Path, outdir: Path, scripts_dir: Path) -> None:
+def run_dapc(
+    multi_snp_genepop: Path,
+    popmap: Path,
+    outdir: Path,
+    scripts_dir: Path,
+) -> None:
     """Run DAPC using the multi-SNP-per-locus genepop file."""
     run_r_script(
         scripts_dir / "run_dapc.R",
@@ -179,10 +181,11 @@ def run_divmigrate(
     scripts_dir: Path,
     stat: str,
     boots: int,
+    threads: int,
     node_names: str | None = None,
 ) -> None:
     """Run divMigrate on the multi-SNP-per-locus genepop file."""
-    args = [str(multi_snp_genepop), str(outdir), stat, str(boots)]
+    args = [str(multi_snp_genepop), str(outdir), stat, str(boots), str(threads)]
     if node_names is not None:
         args.append(node_names)
     run_r_script(scripts_dir / "run_divmigrate.R", args)
@@ -252,6 +255,12 @@ def parse_args() -> argparse.Namespace:
         help="Bootstrap replicates for divMigrate. Default: 1000",
     )
     parser.add_argument(
+        "--threads",
+        type=int,
+        default=1,
+        help="Requested CPU threads for divMigrate. Values >1 enable parallel mode when supported. Default: 1",
+    )
+    parser.add_argument(
         "--divmigrate-node-names",
         help="Optional comma-separated node names for divMigrate plots.",
     )
@@ -297,7 +306,6 @@ def main() -> int:
             "--run-amova, --run-dapc, --run-ibd, --run-divmigrate"
         )
 
-    # Validate popmap against the multi-SNP genepop first and create corrected popmap
     corrected_popmap = validate_and_fix_popmap(
         genepop_path=multi_snp_genepop,
         popmap_path=original_popmap,
@@ -305,7 +313,6 @@ def main() -> int:
         label="multi-SNP",
     )
 
-    # Validate the corrected popmap against the haplotype genepop too
     corrected_popmap = validate_and_fix_popmap(
         genepop_path=haps_genepop,
         popmap_path=corrected_popmap,
@@ -328,12 +335,14 @@ def main() -> int:
 
         if args.run_divmigrate:
             logging.info("Running divMigrate...")
+            logging.info("Using %s thread(s) for divMigrate.", args.threads)
             run_divmigrate(
                 multi_snp_genepop,
                 dirs["divmigrate"],
                 scripts_dir,
                 args.divmigrate_stat,
                 args.divmigrate_boots,
+                args.threads,
                 args.divmigrate_node_names,
             )
 
