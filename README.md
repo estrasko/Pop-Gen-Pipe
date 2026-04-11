@@ -45,46 +45,44 @@ graph TD;
 ```
 
 ## Installation
-Clone the repository:
-
-git clone https://github.com/estrasko/Pop-Gen-Pipe.git
-cd Pop-Gen-Pipe
+1. Clone the repository: *git clone https://github.com/estrasko/Pop-Gen-Pipe.git*
+   Move to directory: *cd Pop-Gen-Pipe*
 
 NOTE: you can also fork the repository and work that way.
 
-## Create the Conda Environment
+### Create the Conda Environment
 1) Put "environment.yml" in your designated working folder
 2) Create conda environment under a new name: *conda env create -f environment.yml --name Pop-Gen-PipeEnv*
 3) Activate your new environment: *conda activate Pop-Gen-PipeEnv*
 
 ## Required Input Files
-*NOTE: ALL INPUT FILES MUST BE IN SAME ORDER (by population)!* critically, FST and geo matrices must have identical dimensions
+Files are created by the *Populations* step in STACKS<sup>1 
+*NOTE: ALL INPUT FILES MUST BE IN SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
 and identical population order.
 
-### Genepop files
+### 1. Genepop files
 | File           | Purpose           |
 | -------------- | ----------------- |
 | `haps.genepop` | AMOVA             |
 | `snps.genepop` | DAPC + divMigrate |
 
-### Popmap (popmap.csv)
-CSV file with:
-Sample,Population
+### 2. Popmap (popmap.csv)
+CSV file with: Sample,Population
 LT-pop_01,Buxahatchee
 LT-pop_02,Buxahatchee
 ...
 
-the pattern is name of individual followed by population of origin. comma separated values.
+The pattern is name of individual followed by population of origin (comma separated values)
 
-### FST matrix (fst.csv)
-square matrix:
+### 3. FST matrix (fst.csv)
+Square matrix:
 0,0.24,0.23,0.18
 0.24,0,0.19,0.13
 0.23,0.19,0,0.13
 0.18,0.13,0.13,0
 
-### Geographic distance matrix (geo.csv)
-square matrix:
+### 4. Geographic distance matrix (geo.csv)
+Square matrix:
 0,170.41,138.18,80.14
 170.41,0,77.68,90.25
 138.18,77.68,0,57.79
@@ -104,23 +102,13 @@ python Pop_script_2.py \
   --run-ibd \
   --run-divmigrate
 
-any of the above analyses can be removed or run individually, like so:
-
-python Pop_script_2.py \
-  --haps-genepop populations.haps.genepop \
-  --multi-snp-genepop populations.snps.genepop \
-  --popmap popmap.csv \
-  --fst-csv fst.csv \
-  --geo-csv geo.csv \
-  --outdir results \
-  --scripts-dir . \
-  --run-amova \
+**any of the above analyses under *--scripts-dir* can be removed or run individually**
 
 ## Optional: Multithreading for divmigrate
-We created this pipeline to run on personal laptops, clusters, or whatever you have to work with. The only sometimes
+This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
 computationally expensive program is divmigrate. If no threading option is specified, the default behavior is threads = 1.
 
-Users can utilize more CPU resources by optionally flagging --threads <N>
+**Users can utilize more CPU resources by optionally flagging --threads <N>**
 
 Example: 
 --run-divmigrate --threads 12
@@ -134,8 +122,9 @@ Note: threading is only available in divmigrate, not the other tests. The others
 ## Isolation by Distance (IBD)
 
 ## Migration Analysis (divmigrate)
-estimates directional gene flow. options:
+Estimates directional gene flow
 
+Options:
 --divmigrate-stat gst
 --divmigrate-stat D
 --divmigrate-stat Nm
@@ -146,6 +135,12 @@ Outputs:
 - summary files
 
 divmigrate is part of the diveRsity package. learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
+
+
+##References
+1. Rochette, N. C., A. G. Rivera‐Colón, and J. M. Catchen. 2019. Stacks 2: Analytical methods for paired‐end sequencing improve RADseq‐based population genomics. Molecular Ecology 28(21):4737–4754.
+
+
 
 # Feedback
 
