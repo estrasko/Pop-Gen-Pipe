@@ -114,7 +114,7 @@ computationally expensive program is divmigrate. If no threading option is speci
 Example: 
 --run-divmigrate --threads 12
 
-==Threading is only available in divmigrate, not the other tests. The others don't need it==
+**NOTE: Threading is only available in divmigrate, not the other tests. The others don't need it**
 
 ## Analysis of Molecular Variance (AMOVA)
 
