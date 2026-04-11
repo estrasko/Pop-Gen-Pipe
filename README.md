@@ -5,7 +5,7 @@ In this project, we wrote a script that streamlines our most commonly used popul
 pipeline. We know how to run the analyses individually. However, our goal was to learn how to connect them together in a way 
 that allows us to work faster using Python commands throughout to connect and guide the pipeline.
 
-<u>Goals:<u/>
+<u>Goals:</u>
 1. Create a reproducible population genomics assembly and analysis
 2. Use a Conda environment for transferable reproducability
 3. Collaborate using git to create the pipeline
@@ -26,7 +26,6 @@ is able to be individually run as a function. The entire script is importable as
 
 All analyses are in the R programming language, where Python calls R for running the analyses and plotting the results.
 
-
 ## Workflow:
 
 ```mermaid
@@ -36,7 +35,8 @@ graph TD;
    B["Sample validation (Python)"]
    B-->C
    B["Sample validation (Python)"]
-   C["Pop Gen analyses (R)"]
+   C["Pop Gen analyses (R)
+   AmoVA, DAPC"]
 ```
 Pop Gen analyses (R):
    ├── AMOVA
