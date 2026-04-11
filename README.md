@@ -1,25 +1,24 @@
 # Population Genomics Pipeline
 
-Scripts useful for general population genomics workflows - Work in progress
-
 ## Project goals
-In this project, we will write a script that streamlines our commonly used population genomics analyses into a clean 
-pipeline. We know how to run the individual analyses. Our goal is to learn how to connect them together in a way 
+In this project, we wrote a script that streamlines our most commonly used population genomics analyses into a clean
+pipeline. We know how to run the analyses individually. However, our goal was to learn how to connect them together in a way 
 that allows us to work faster using Python commands throughout to connect and guide the pipeline.
 
-Goals:
-- reproducible population genomics assembly and analysis
-- use a Conda environment
-- collaborate using git to create the pipeline
-- test the pipeline using ~3 pop gen datasets
+<u>Goals:<u/>
+1. Create a reproducible population genomics assembly and analysis
+2. Use a Conda environment for transferable reproducability
+3. Collaborate using git to create the pipeline
+4. Test the pipeline using ~3 population genomic datasets to confirm use between taxa/projects
 
-### End Goal: Produce quality figures and analyses results reproducable for publication
+### End Goal: Produce quality population genomic figures and analyses results reproducable for publication
 
-## Analysis using multiple SNPs per locus
+## Analysis included in this pipeline (using multiple SNPs per locus datasets)
 - AMOVA
 - DAPC
 - IBD
 - divmigrate
+
 
 ## Overview
 This pipeline uses Python as the master program handling orchestration of runs, validation, and file handling. Every analysis
@@ -27,13 +26,15 @@ is able to be individually run as a function. The entire script is importable as
 
 All analyses are in the R programming language, where Python calls R for running the analyses and plotting the results.
 
+
 ## Workflow:
 
-Input data
+```mermaid
+graph TD:
+   Input data (Post STACKS Populations)-->Sample validation (Python);
+   Sample validation (Python)-->Pop Gen analyses (R)'
    ↓
-Sample validation (Python)
-   ↓
-R analyses:
+Pop Gen analyses (R):
    ├── AMOVA
    ├── DAPC (with cross-validation)
    ├── IBD (Mantel + MRM)
