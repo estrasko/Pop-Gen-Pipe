@@ -36,15 +36,13 @@ graph TD;
    B-->C
    B["Sample validation (Python)"]
    C["Pop Gen analyses (R)
-   AmoVA, DAPC"]
+   - AMOVA, 
+   - DAPC (with cross-validation),
+   - IBD (Mantel + MRM),
+   - divMigrate (gene flow)"]
+   C-->D
+   D["Structured output directories & plots"]
 ```
-Pop Gen analyses (R):
-   ├── AMOVA
-   ├── DAPC (with cross-validation)
-   ├── IBD (Mantel + MRM)
-   └── divMigrate (gene flow)
-   ↓
-Structured output directories + plots
 
 ## Installation
 Clone the repository:
