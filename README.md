@@ -58,9 +58,9 @@ NOTE: you can also fork the repository and work that way.
 
 ### Create the Conda Environment
 1) Put "environment.yml" in your designated working folder
-2) Create conda environment under a new name: 
+2) Create conda environment: 
    ```bash
-   conda env create -f environment.yml --name Pop-Gen-PipeEnv
+   conda env create -f environment.yml
    ```
 3) Activate your new environment: 
    ```bash
