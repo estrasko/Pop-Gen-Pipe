@@ -18,7 +18,11 @@ outdir <- args[3]
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
 cat("Reading multi-SNP genepop file...\n")
-genind_obj <- read.genepop(input_file)
+
+# adegenet::read.genepop() expects a .gen extension
+temp_gen_file <- tempfile(fileext = ".gen")
+file.copy(input_file, temp_gen_file, overwrite = TRUE)
+genind_obj <- read.genepop(temp_gen_file)
 
 cat("Reading popmap...\n")
 popmap_df <- read.csv(popmap_file, stringsAsFactors = FALSE)
