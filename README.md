@@ -30,7 +30,7 @@ All analyses are in the R programming language, where Python calls R for running
 ## Workflow:
 
 ```mermaid
-graph TD:
+graph TD;
    Input data (Post STACKS Populations)-->Sample validation (Python);
    Sample validation (Python)-->Pop Gen analyses (R)
 ```
