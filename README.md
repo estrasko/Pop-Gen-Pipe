@@ -82,10 +82,11 @@ and identical population order.
 
 ### 2. Popmap (popmap.csv)
    CSV file with: Sample,Population\
+   ```csv
    LT-pop_01,Buxahatchee\
    LT-pop_02,Buxahatchee\
    ...
-
+   ```
    *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
 
 ### 3. FST (Fixation index) matrix (fst.csv)
@@ -130,7 +131,7 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after *--scripts-dir* can be removed or run individually**
+**Any of the above analyses after `--scripts-dir` can be removed or run individually**
 
 
 
