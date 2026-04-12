@@ -69,7 +69,7 @@ graph TD;
 
 ## Required Input Files
 
-Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1.
+Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1</sup>.
 
 *NOTE: ALL INPUT FILES MUST BE IN THE SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
 and identical population order.
@@ -130,20 +130,18 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**any of the above analyses under *--scripts-dir* can be removed or run individually**
+**Any of the above analyses after *--scripts-dir* can be removed or run individually**
 
 
 
 ## Optional: Multithreading for divmigrate
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
-computationally expensive program is divmigrate. If no threading option is specified, the default behavior is threads = 1.
+computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1.
 
 **Users can utilize more CPU resources by optionally flagging --threads <N>**
 
 Example: 
-```bash
---run-divmigrate --threads 12
-```
+`--run-divmigrate --threads 12`
 
 **NOTE: Threading is only available in divmigrate, not the other tests. The others don't need it**
 
@@ -170,7 +168,7 @@ Example:
    - network plots
    - summary files
 
-   divmigrate is part of the diveRsity package. learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
+   divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
 
 
 
