@@ -1,17 +1,15 @@
 # Population Genomics Pipeline
 
 ## Project goals
-In this project, we wrote a script that streamlines commonly used population genomics analyses into a clean
-pipeline. We know how to run the analyses individually. However, our goal was to learn how to connect them together in a way 
-that allows us to work faster using Python commands throughout to connect and guide the pipeline.
+In this project, we built a Python pipeline that connects commonly used population genomics analyses — AMOVA, DAPC, IBD, and divMigrate — into a single, streamlined script that can be imported as a module. While we already knew how to run the analyses individually, our goal was to learn how to string them together using Python, enabling faster and more reproducible results.
 
-**Goals:**
-1. Create a reproducible population genomics assembly and analysis
+### Objectives
+1. Create a reproducible population genomics analysis workflow
 2. Use a Conda environment for transferable reproducibility
 3. Collaborate using git to create the pipeline
-4. Test the pipeline using ~3 population genomic datasets to confirm use between taxa/projects
+4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects
 
-### End Goal: Produce quality population genomic figures and analyses results reproducable for publication
+### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.
 
 ## Analyses included in this pipeline (using multiple SNPs per locus datasets)
 - AMOVA
@@ -24,7 +22,7 @@ that allows us to work faster using Python commands throughout to connect and gu
 Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.
 
 
-## Workflow:
+## Workflow
 
 ```mermaid
 graph TD;
@@ -47,21 +45,22 @@ graph TD;
    ```bash
    git clone https://github.com/estrasko/Pop-Gen-Pipe.git
    ```
-2) Move to directory: 
+   NOTE: You can also fork the repository and work that way.
+
+2) Move to the directory: 
    ```bash
    cd Pop-Gen-Pipe
    ```
 
-   NOTE: you can also fork the repository and work that way.
+3) Create and activate the conda environment:
 
-### Create the Conda Environment
-1) Put "environment.yml" in your designated working folder
+   - Put "environment.yml" in your designated working folder.
 
-2) Create conda environment: 
+   - Create a new conda environment: 
    ```bash
    conda env create -f environment.yml
    ```
-3) Activate your new environment: 
+   - Activate your new environment: 
    ```bash
    conda activate Pop-Gen-PipeEnv
    ```
@@ -88,25 +87,21 @@ LT-pop_02,Buxahatchee
 
 ### 3. FST matrix (fst.csv)
 Square matrix:
-```math
-\begin{matrix}
+$\begin{matrix}
 0 & 0.24 & 0.23 & 0.18 \\
 0.24 & 0 & 0.19 & 0.13 \\
 0.23 & 0.19 & 0 & 0.13 \\
 0.18 & 0.13 & 0.13 & 0
-\end{matrix}
-```
+\end{matrix}$
 
 ### 4. Geographic distance matrix (geo.csv)
 Square matrix:
-```math
-\begin{matrix}
+$\begin{matrix}
 0 & 170.41 & 138.18 & 80.14 \\
 170.41 & 0 & 77.68 & 90.25 \\
 138.18 & 77.68 & 0 & 57.79 \\
 80.14 & 90.25 & 57.79 & 0
-\end{matrix}
-```
+\end{matrix}$
 
 ## Run the Pipeline
 ```bash
