@@ -90,6 +90,7 @@ cat("Running DAPC cross-validation...\n")
 # Set random seed to ensure reproducible results across runs
 set.seed(123)
 
+# Find the optimal number of PCs for DAPC analysis
 xval_obj <- xvalDapc(
   x = tab(genind_obj, NA.method = "mean"),
   grp = pop(genind_obj),
@@ -115,6 +116,8 @@ if (is.null(best_n_pca)) {
 }
 
 best_n_pca <- as.integer(best_n_pca)
+
+# Specify the number of DA axes to keep
 n_groups <- nPop(genind_obj)
 best_n_da <- min(2, n_groups - 1)
 
@@ -125,8 +128,10 @@ if (best_n_da < 1) {
 cat(paste0("Selected n.pca = ", best_n_pca, "\n"))
 cat(paste0("Selected n.da = ", best_n_da, "\n"))
 
+cat("Running DAPC...\n")
 dapc_result <- dapc(genind_obj, n.pca = best_n_pca, n.da = best_n_da)
 
+# Save results and plots to files
 capture.output(
   list(
     selected_n_pca = best_n_pca,
