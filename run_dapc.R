@@ -5,23 +5,27 @@ suppressPackageStartupMessages({
   library(ggplot2)
 })
 
+# Capture the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) < 3) {
-  stop("Usage: Rscript run_dapc.R <multi_snp_genepop> <popmap_file> <outdir>")
+  stop("Missing arguments. Expected 3, got ", length(args),
+     ".\nUsage: Rscript run_dapc.R <multi_snp_genepop> <popmap_file> <outdir>")
 }
 
 input_file <- args[1]
 popmap_file <- args[2]
 outdir <- args[3]
 
+# Create directory to store output files
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
-cat("Reading multi-SNP genepop file...\n")
-
+# Create a temporary .gen copy of the input file for use with read.genepop()
 # adegenet::read.genepop() expects a .gen extension
 temp_gen_file <- tempfile(fileext = ".gen")
 file.copy(input_file, temp_gen_file, overwrite = TRUE)
+
+cat("Reading multi-SNP genepop file...\n")
 genind_obj <- read.genepop(temp_gen_file)
 
 cat("Reading popmap...\n")
@@ -31,8 +35,10 @@ if (!("Population" %in% names(popmap_df))) {
   stop("Popmap file must contain a column named 'Population'.")
 }
 
+# Extract individual sample names from the genind object 
 genepop_samples <- indNames(genind_obj)
 
+# Check that sample names in the popmap file match the names from the genind object
 if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
   popmap_samples <- as.character(popmap_df$Sample)
 
@@ -54,8 +60,8 @@ if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
   if (nInd(genind_obj) != nrow(popmap_df)) {
     stop(
       paste0(
-        "Mismatch between individuals in genepop (", nInd(genind_obj),
-        ") and rows in popmap (", nrow(popmap_df), ")."
+        "Mismatch between number of individuals in genepop (", nInd(genind_obj),
+        ") and number of rows in popmap (", nrow(popmap_df), ")."
       )
     )
   }
@@ -65,9 +71,10 @@ if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
   )
 }
 
+# Label samples in genind object by population using the popmap file
 pop(genind_obj) <- as.factor(popmap_df$Population)
 
-cat("Running DAPC cross-validation...\n")
+# Determine maximum number of PCA components based on your dataset
 max_pca_allowed <- min(
   100,
   nInd(genind_obj) - 1,
@@ -78,6 +85,9 @@ if (max_pca_allowed < 2) {
   stop("Not enough data to run DAPC cross-validation.")
 }
 
+cat("Running DAPC cross-validation...\n")
+
+# Set random seed to ensure reproducible results across runs
 set.seed(123)
 
 xval_obj <- xvalDapc(
