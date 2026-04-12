@@ -8,6 +8,7 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 
+
 if (!(length(args) %in% c(3, 4))) {
   stop("Usage: Rscript run_ibd.R <fst_csv> <distance_csv> <outdir> [summary_stats_csv]")
 }
@@ -26,6 +27,21 @@ fst_mat <- as.matrix(fst_df)
 cat("Reading geographic distance matrix...\n")
 distance_df <- read.csv(distance_file, header = FALSE, check.names = FALSE)
 geo_mat <- as.matrix(distance_df)
+
+#Checking to make sure there's enough populations to run IBD
+n_pop <- nrow(fst_mat)
+
+if (n_pop <3) {
+   message("Not enough populations for IBD analysis (need >=3. Skipping Mantel and MRM analyses)")
+
+  writeLines(
+    paste("Fst:", fst_mat[1,2], "Distance:", geo_mat[1,2]),
+    con = file.path(outdir, "ibd_skipped.txt")
+  )
+  
+  quit(save = "no", status = 0)
+}
+
 
 # Basic validation
 if (nrow(fst_mat) != ncol(fst_mat)) {

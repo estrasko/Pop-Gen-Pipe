@@ -166,7 +166,7 @@ Example:
 
 
 
-##References
+## References
 1. Rochette, N. C., A. G. Rivera‐Colón, and J. M. Catchen. 2019. Stacks 2: Analytical methods for paired‐end sequencing improve RADseq‐based population genomics. Molecular Ecology 28(21):4737–4754.
 
 
