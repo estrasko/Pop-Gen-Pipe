@@ -47,7 +47,7 @@ if (n_pop <3) {
 }
 
 
-# Basic validation
+# Basic validation, validate matrices
 if (nrow(fst_mat) != ncol(fst_mat)) {
   stop("fst.csv must be a square matrix.")
 }
@@ -60,9 +60,12 @@ if (!all(dim(fst_mat) == dim(geo_mat))) {
   stop("fst.csv and geo.csv must have the same dimensions.")
 }
 
+# Convert to distance objects
+
 fst_dist <- as.dist(fst_mat)
 geo_dist <- as.dist(geo_mat)
 
+# Mantel test (IBD analysis)
 cat("Running Mantel test...\n")
 mantel_result <- vegan::mantel(
   geo_dist,
@@ -71,14 +74,18 @@ mantel_result <- vegan::mantel(
   permutations = 1000
 )
 
+# Running MRM (Multiple Regression on distance matrices)
+
 cat("Running MRM...\n")
 mrm_result <- MRM(fst_dist ~ geo_dist, method = "linear", mrank = FALSE)
 
+# Save outputs
 capture.output(
   mantel_result,
   file = file.path(outdir, "mantel_result.txt")
 )
 
+# Save outputs 
 capture.output(
   mrm_result,
   file = file.path(outdir, "mrm_result.txt")
