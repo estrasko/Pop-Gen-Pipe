@@ -98,12 +98,7 @@ and identical population order.
 ### 4. Geographic distance matrix (geo.csv)
    Square matrix:
    $
-   \begin{matrix}
-   0 & 170.41 & 138.18 & 80.14 \\
-   170.41 & 0 & 77.68 & 90.25 \\
-   138.18 & 77.68 & 0 & 57.79 \\
-   80.14 & 90.25 & 57.79 & 0
-   \end{matrix}
+   \begin{matrix} 0 & 170.41 & 138.18 & 80.14 \\ 170.41 & 0 & 77.68 & 90.25 \\ 138.18 & 77.68 & 0 & 57.79 \\ 80.14 & 90.25 & 57.79 & 0 \end{matrix}
    $
 
 
