@@ -54,13 +54,13 @@ graph TD;
 
 3. Create and activate the conda environment:
 
-   a. Put "environment.yml" in your designated working folder.
+   1. Put "environment.yml" in your designated working folder.
 
-   b. Create a new conda environment: 
+   1. Create a new conda environment: 
       ```bash
       conda env create -f environment.yml
       ```
-   c. Activate your new environment: 
+   1. Activate your new environment: 
       ```bash
       conda activate Pop-Gen-PipeEnv
       ```
@@ -75,42 +75,42 @@ Files required for input in this pipeline are created by the *Populations* step 
 and identical population order.
 
 ### 1. Genepop files
-      | File           | Purpose           |
-      | -------------- | ----------------- |
-      | `haps.genepop` | AMOVA             |
-      | `snps.genepop` | DAPC + divMigrate |
+   | File           | Purpose           |
+   | -------------- | ----------------- |
+   | `haps.genepop` | AMOVA             |
+   | `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
-      CSV file with: Sample,Population
-      LT-pop_01,Buxahatchee
-      LT-pop_02,Buxahatchee
-      ...
+   CSV file with: Sample,Population
+   LT-pop_01,Buxahatchee
+   LT-pop_02,Buxahatchee
+   ...
 
-      *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
+   *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
 
 ### 3. FST (Fixation index) matrix (fst.csv)
-      Square matrix:
+   Square matrix:
 
-      $$
-      \begin{matrix}
-      0 & 0.24 & 0.23 & 0.18 \\
-      0.24 & 0 & 0.19 & 0.13 \\
-      0.23 & 0.19 & 0 & 0.13 \\
-      0.18 & 0.13 & 0.13 & 0
-      \end{matrix}
-      $$
+   $$
+   \begin{matrix}
+   0 & 0.24 & 0.23 & 0.18 \\
+   0.24 & 0 & 0.19 & 0.13 \\
+   0.23 & 0.19 & 0 & 0.13 \\
+   0.18 & 0.13 & 0.13 & 0
+   \end{matrix}
+   $$
 
 ### 4. Geographic distance matrix (geo.csv)
-      Square matrix:
+   Square matrix:
 
-      $$
-      \begin{matrix}
-      0 & 170.41 & 138.18 & 80.14 \\
-      170.41 & 0 & 77.68 & 90.25 \\
-      138.18 & 77.68 & 0 & 57.79 \\
-      80.14 & 90.25 & 57.79 & 0
-      \end{matrix}
-      $$
+   $$
+   \begin{matrix}
+   0 & 170.41 & 138.18 & 80.14 \\
+   170.41 & 0 & 77.68 & 90.25 \\
+   138.18 & 77.68 & 0 & 57.79 \\
+   80.14 & 90.25 & 57.79 & 0
+   \end{matrix}
+   $$
 
 
 
