@@ -5,23 +5,27 @@ suppressPackageStartupMessages({
   library(poppr)
 })
 
+# Capture the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) < 3) {
-  stop("Usage: Rscript run_amova.R <haps_genepop> <popmap_file> <outdir>")
+  stop("Missing arguments. Expected 3, got ", length(args),
+     ".\nUsage: Rscript run_amova.R <haps_genepop> <popmap_file> <outdir>")
 }
 
 input_file <- args[1]
 popmap_file <- args[2]
 outdir <- args[3]
 
+# Create directory to store output files
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
-cat("Reading haplotype genepop file...\n")
-
-# adegenet::read.genepop() expects a .gen extension
+# Create a temporary .gen copy of the input file for use with read.genepop()
+# adegenet::read.genepop() requires a .gen extension
 temp_gen_file <- tempfile(fileext = ".gen")
 file.copy(input_file, temp_gen_file, overwrite = TRUE)
+
+cat("Reading haplotype genepop file...\n")
 genind_obj <- read.genepop(temp_gen_file)
 
 cat("Reading popmap...\n")
@@ -31,8 +35,10 @@ if (!("Population" %in% names(popmap_df))) {
   stop("Popmap file must contain a column named 'Population'.")
 }
 
+# Extract individual sample names from the genind object 
 genepop_samples <- indNames(genind_obj)
 
+# Check that sample names in the popmap file match the names from the genind object 
 if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
   popmap_samples <- as.character(popmap_df$Sample)
 
@@ -54,8 +60,8 @@ if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
   if (nInd(genind_obj) != nrow(popmap_df)) {
     stop(
       paste0(
-        "Mismatch between individuals in genepop (", nInd(genind_obj),
-        ") and rows in popmap (", nrow(popmap_df), ")."
+        "Mismatch between number of individuals in genepop (", nInd(genind_obj),
+        ") and number of rows in popmap (", nrow(popmap_df), ")."
       )
     )
   }
@@ -65,7 +71,10 @@ if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
   )
 }
 
+# Create a genclone object for use with poppr.amova()
 genclone_obj <- as.genclone(genind_obj)
+
+# Label samples in genclone object by population using the popmap file
 strata(genclone_obj) <- data.frame(Population = popmap_df$Population)
 
 cat("Running AMOVA...\n")
