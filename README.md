@@ -13,9 +13,11 @@ In this project, we built a Python pipeline that connects commonly used populati
 ### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.
 
 
+
 ## Overview
 
 Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.
+
 
 
 ## Workflow
@@ -36,6 +38,7 @@ graph TD;
    D["Structured output directories & plots"]
 ```
 
+
 ## Installation
 
 1. Clone the repository: 
@@ -51,62 +54,64 @@ graph TD;
 
 3. Create and activate the conda environment:
 
-   1. Put "environment.yml" in your designated working folder.
+   a. Put "environment.yml" in your designated working folder.
 
-   1. Create a new conda environment: 
+   b. Create a new conda environment: 
       ```bash
       conda env create -f environment.yml
       ```
-   1. Activate your new environment: 
+   c. Activate your new environment: 
       ```bash
       conda activate Pop-Gen-PipeEnv
       ```
 
 
+
 ## Required Input Files
 
-Files are created by the *Populations* step in STACKS<sup>1 
+Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1.
 
 *NOTE: ALL INPUT FILES MUST BE IN THE SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
 and identical population order.
 
 ### 1. Genepop files
-   | File           | Purpose           |
-   | -------------- | ----------------- |
-   | `haps.genepop` | AMOVA             |
-   | `snps.genepop` | DAPC + divMigrate |
+      | File           | Purpose           |
+      | -------------- | ----------------- |
+      | `haps.genepop` | AMOVA             |
+      | `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
-   CSV file with: Sample,Population
-   LT-pop_01,Buxahatchee
-   LT-pop_02,Buxahatchee
-   ...
+      CSV file with: Sample,Population
+      LT-pop_01,Buxahatchee
+      LT-pop_02,Buxahatchee
+      ...
 
-   *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
+      *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
 
-### 3. FST matrix (fst.csv)
-   Square matrix:
-   
-   $$
-   \begin{matrix}
-   0 & 0.24 & 0.23 & 0.18 \\
-   0.24 & 0 & 0.19 & 0.13 \\
-   0.23 & 0.19 & 0 & 0.13 \\
-   0.18 & 0.13 & 0.13 & 0
-   \end{matrix}
-   $$
+### 3. FST (Fixation index) matrix (fst.csv)
+      Square matrix:
+
+      $$
+      \begin{matrix}
+      0 & 0.24 & 0.23 & 0.18 \\
+      0.24 & 0 & 0.19 & 0.13 \\
+      0.23 & 0.19 & 0 & 0.13 \\
+      0.18 & 0.13 & 0.13 & 0
+      \end{matrix}
+      $$
 
 ### 4. Geographic distance matrix (geo.csv)
-   Square matrix:
+      Square matrix:
 
-   $$
-   \begin{matrix}
-   0 & 170.41 & 138.18 & 80.14 \\
-   170.41 & 0 & 77.68 & 90.25 \\
-   138.18 & 77.68 & 0 & 57.79 \\
-   80.14 & 90.25 & 57.79 & 0
-   \end{matrix}
-   $$
+      $$
+      \begin{matrix}
+      0 & 170.41 & 138.18 & 80.14 \\
+      170.41 & 0 & 77.68 & 90.25 \\
+      138.18 & 77.68 & 0 & 57.79 \\
+      80.14 & 90.25 & 57.79 & 0
+      \end{matrix}
+      $$
+
 
 
 ## Run the Pipeline
@@ -128,6 +133,7 @@ python Pop_script_2.py \
 **any of the above analyses under *--scripts-dir* can be removed or run individually**
 
 
+
 ## Optional: Multithreading for divmigrate
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
 computationally expensive program is divmigrate. If no threading option is specified, the default behavior is threads = 1.
@@ -142,6 +148,7 @@ Example:
 **NOTE: Threading is only available in divmigrate, not the other tests. The others don't need it**
 
 
+
 ## Analyses
 
 ### 1. Analysis of Molecular Variance (AMOVA)
@@ -151,19 +158,20 @@ Example:
 ### 3. Isolation by Distance (IBD)
 
 ### 4. Migration Analysis (divmigrate)
-Estimates directional gene flow
+   Estimates directional gene flow
 
-Options:
---divmigrate-stat gst
---divmigrate-stat D
---divmigrate-stat Nm
+   Options:
+   --divmigrate-stat gst
+   --divmigrate-stat D
+   --divmigrate-stat Nm
 
-Outputs:
-- migration matrices
-- network plots
-- summary files
+   Outputs:
+   - migration matrices
+   - network plots
+   - summary files
 
-divmigrate is part of the diveRsity package. learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
+   divmigrate is part of the diveRsity package. learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
+
 
 
 ##References
