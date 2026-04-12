@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+# Load packages
 suppressPackageStartupMessages({
   library(vegan)
   library(ecodist)
@@ -8,18 +9,21 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 
-
+# Check number of arguments
 if (!(length(args) %in% c(3, 4))) {
   stop("Usage: Rscript run_ibd.R <fst_csv> <distance_csv> <outdir> [summary_stats_csv]")
 }
 
+# Assign inputs
 fst_file <- args[1]
 distance_file <- args[2]
 outdir <- args[3]
 summary_stats_file <- if (length(args) == 4) args[4] else NA
 
+# Create output directory if it doesn't exist
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
+# Read Fst matrix and geographic distance matrix
 cat("Reading Fst matrix...\n")
 fst_df <- read.csv(fst_file, header = FALSE, check.names = FALSE)
 fst_mat <- as.matrix(fst_df)
