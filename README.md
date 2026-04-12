@@ -1,7 +1,7 @@
 # Population Genomics Pipeline
 
 ## Project goals
-In this project, we wrote a script that streamlines our most commonly used population genomics analyses into a clean
+In this project, we wrote a script that streamlines commonly used population genomics analyses into a clean
 pipeline. We know how to run the analyses individually. However, our goal was to learn how to connect them together in a way 
 that allows us to work faster using Python commands throughout to connect and guide the pipeline.
 
@@ -21,10 +21,8 @@ that allows us to work faster using Python commands throughout to connect and gu
 
 
 ## Overview
-This pipeline uses Python as the master program handling orchestration of runs, validation, and file management. Every analysis
-can be run individually as a function. The entire script is importable as a module.
+Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.
 
-All analyses are in the R programming language, where Python calls R for running the analyses and plotting the results.
 
 ## Workflow:
 
@@ -54,10 +52,11 @@ graph TD;
    cd Pop-Gen-Pipe
    ```
 
-NOTE: you can also fork the repository and work that way.
+   NOTE: you can also fork the repository and work that way.
 
 ### Create the Conda Environment
 1) Put "environment.yml" in your designated working folder
+
 2) Create conda environment: 
    ```bash
    conda env create -f environment.yml
@@ -70,7 +69,7 @@ NOTE: you can also fork the repository and work that way.
 ## Required Input Files
 Files are created by the *Populations* step in STACKS<sup>1 
 
-*NOTE: ALL INPUT FILES MUST BE IN SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
+*NOTE: ALL INPUT FILES MUST BE IN THE SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
 and identical population order.
 
 ### 1. Genepop files
@@ -85,21 +84,25 @@ LT-pop_01,Buxahatchee
 LT-pop_02,Buxahatchee
 ...
 
-The pattern is name of individual followed by population of origin (comma separated values)
+*Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
 
 ### 3. FST matrix (fst.csv)
 Square matrix:
-0,0.24,0.23,0.18
-0.24,0,0.19,0.13
-0.23,0.19,0,0.13
-0.18,0.13,0.13,0
+\begin{matrix}
+0 & 0.24 & 0.23 & 0.18 \\
+0.24 & 0 & 0.19 & 0.13 \\
+0.23 & 0.19 & 0 & 0.13 \\
+0.18 & 0.13 & 0.13 & 0
+\end{matrix}
 
 ### 4. Geographic distance matrix (geo.csv)
 Square matrix:
-0,170.41,138.18,80.14
-170.41,0,77.68,90.25
-138.18,77.68,0,57.79
-80.14,90.25,57.79,0
+\begin{matrix}
+0 & 170.41 & 138.18 & 80.14 \\
+170.41 & 0 & 77.68 & 90.25 \\
+138.18 & 77.68 & 0 & 57.79 \\
+80.14 & 90.25 & 57.79 & 0
+\end{matrix}
 
 ## Run the Pipeline
 ```bash
