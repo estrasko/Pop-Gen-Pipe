@@ -81,9 +81,9 @@ and identical population order.
    | `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
-   CSV file with: Sample,Population
-   LT-pop_01,Buxahatchee
-   LT-pop_02,Buxahatchee
+   CSV file with: Sample,Population\
+   LT-pop_01,Buxahatchee\
+   LT-pop_02,Buxahatchee\
    ...
 
    *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
