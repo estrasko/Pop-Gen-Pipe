@@ -88,6 +88,7 @@ amova_result <- poppr.amova(
 cat("Running randomization test...\n")
 amova_randtest <- randtest(amova_result, nrepet = 999)
 
+# Save results and randtest plot to files
 capture.output(
   amova_result,
   file = file.path(outdir, "amova_result.txt")
