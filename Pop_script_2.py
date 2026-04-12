@@ -11,6 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 
+#---- Setup functions ----
 def setup_logging(log_file: Path) -> None:
     """Configure logging to both console and file."""
     log_file.parent.mkdir(parents=True, exist_ok=True)
@@ -133,6 +134,7 @@ def validate_and_fix_popmap(
     return corrected_path
 
 
+#---- Functions to run analyses in R ----
 def run_r_script(script_path: Path, args: list[str]) -> None:
     """Run an R script with subprocess and fail loudly on error."""
     cmd = ["Rscript", str(script_path)] + args
@@ -191,6 +193,7 @@ def run_divmigrate(
     run_r_script(scripts_dir / "run_divmigrate.R", args)
 
 
+#---- Main pipeline functions ----
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments for the pipeline."""
     parser = argparse.ArgumentParser(
