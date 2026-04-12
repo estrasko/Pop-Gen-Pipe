@@ -81,38 +81,31 @@ and identical population order.
    | `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
-   CSV file with: Sample,Population\
+   CSV file with: Sample,Population
    ```csv
-   LT-pop_01,Buxahatchee\
-   LT-pop_02,Buxahatchee\
+   LT-pop_01,Buxahatchee
+   LT-pop_02,Buxahatchee
    ...
    ```
    *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
 
 ### 3. FST (Fixation index) matrix (fst.csv)
    Square matrix:
-
-   $$
-   \begin{matrix}
-   0 & 0.24 & 0.23 & 0.18 \\
-   0.24 & 0 & 0.19 & 0.13 \\
-   0.23 & 0.19 & 0 & 0.13 \\
-   0.18 & 0.13 & 0.13 & 0
-   \end{matrix}
-   $$
+   ```csv
+   0,0.24,0.23,0.18
+   0.24,0,0.19,0.13
+   0.23,0.19,0,0.13
+   0.18,0.13,0.13,0
+   ```
 
 ### 4. Geographic distance matrix (geo.csv)
    Square matrix:
-
-   $$
-   \begin{matrix}
-   0 & 170.41 & 138.18 & 80.14 \\
-   170.41 & 0 & 77.68 & 90.25 \\
-   138.18 & 77.68 & 0 & 57.79 \\
-   80.14 & 90.25 & 57.79 & 0
-   \end{matrix}
-   $$
-
+   ```csv
+   0,170.41,138.18,80.14
+   170.41,0,77.68,90.25
+   138.18,77.68,0,57.79
+   80.14,90.25,57.79,0
+   ```
 
 
 ## Run the Pipeline
