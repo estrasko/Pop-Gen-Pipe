@@ -1,5 +1,5 @@
-# Population Genomics Pipeline  
-
+# Population Genomics Pipeline
+<br/>
 
 ## Project goals
 In this project, we built a Python pipeline that connects commonly used population genomics analyses — AMOVA, DAPC, IBD, and divMigrate (using multiple SNPs per locus datasets) — into a single, streamlined script that can be imported as a module. While we already knew how to run the analyses individually, our goal was to learn how to string them together using Python, enabling faster and more reproducible results.
@@ -10,12 +10,12 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects
 
-### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
+**End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
 
 ## Overview
 Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.<br/><br/>
 
-## Workflow  
+## Workflow
 ```mermaid
 graph TD;
    A-->B
@@ -31,7 +31,7 @@ graph TD;
    C-->D
    D["Structured output directories & plots"]
 ```
-<br/><br/>
+<br/>
 
 ## Installation  
 
@@ -58,7 +58,7 @@ graph TD;
       ```bash
       conda activate Pop-Gen-PipeEnv
       ```
-<br/><br/>
+<br/>
 
 ## Required Input Files  
 
@@ -68,39 +68,39 @@ Files required for input in this pipeline are created by the *Populations* step 
 and identical population order.
 
 ### 1. Genepop files
-&emsp;| File           | Purpose           |
-&emsp;| -------------- | ----------------- |
-&emsp;| `haps.genepop` | AMOVA             |
-&emsp;| `snps.genepop` | DAPC + divMigrate |
+   | File           | Purpose           |
+   | -------------- | ----------------- |
+   | `haps.genepop` | AMOVA             |
+   | `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
 &emsp;CSV file with two columns:
-   ```csv
-   Sample,Population
-   LT-pop_01,Buxahatchee
-   LT-pop_02,Buxahatchee
-   ...
-   ```
+      ```csv
+      Sample,Population
+      LT-pop_01,Buxahatchee
+      LT-pop_02,Buxahatchee
+      ...
+      ```
 &emsp;*Sample* is the name of the individual and *Population* is the population of origin.
 
 ### 3. FST (Fixation index) matrix (fst.csv)
 &emsp;CSV file with a square matrix:
-   ```csv
-   0,0.24,0.23,0.18
-   0.24,0,0.19,0.13
-   0.23,0.19,0,0.13
-   0.18,0.13,0.13,0
-   ```
+      ```csv
+      0,0.24,0.23,0.18
+      0.24,0,0.19,0.13
+      0.23,0.19,0,0.13
+      0.18,0.13,0.13,0
+      ```
 
 ### 4. Geographic distance matrix (geo.csv)
 &emsp;CSV file with a square matrix:
-   ```csv
-   0,170.41,138.18,80.14
-   170.41,0,77.68,90.25
-   138.18,77.68,0,57.79
-   80.14,90.25,57.79,0
-   ```
-<br/><br/>
+      ```csv
+      0,170.41,138.18,80.14
+      170.41,0,77.68,90.25
+      138.18,77.68,0,57.79
+      80.14,90.25,57.79,0
+      ```
+<br/>
 
 ## Run the Pipeline
 ```bash
