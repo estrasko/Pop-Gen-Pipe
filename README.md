@@ -9,7 +9,7 @@ In this project, we built a Python pipeline that connects commonly used populati
 2. Use a Conda environment for transferable reproducibility
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects  
-
+<br/>
 
 **End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
 
@@ -88,7 +88,7 @@ and identical population order.
    ...
    ```
 
-&emsp;*Sample* is the name of the individual and *Population* is the population of origin.
+&emsp;*Sample* is the name of the individual and *Population* is the population of origin.<br/>
 
 ### 3. FST (Fixation index) matrix (fst.csv)
 
@@ -100,6 +100,7 @@ and identical population order.
    0.23,0.19,0,0.13
    0.18,0.13,0.13,0
    ```
+<br/>
 
 ### 4. Geographic distance matrix (geo.csv)
 
@@ -111,7 +112,7 @@ and identical population order.
    138.18,77.68,0,57.79
    80.14,90.25,57.79,0
    ```
-<br/>
+   <br/>
 
 ## Run the Pipeline
 
