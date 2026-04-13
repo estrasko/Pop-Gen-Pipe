@@ -10,7 +10,7 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects<br/>
 
-**End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
+####End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
 
 ## Overview
 
@@ -66,7 +66,7 @@ graph TD;
 
 Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1</sup>.
 
-> *NOTE: ALL INPUT FILES MUST HAVE POPULATIONS IN THE SAME ORDER!* Critically, FST and geo matrices must have identical dimensions and identical population order.
+> NOTE: **All input files must have populations in the same order!** Critically, FST and geo matrices must have identical dimensions and identical population order.
 
 ### 1. Genepop files
 
@@ -127,13 +127,18 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.** If each file is located in your current working directory, then only the file name is needed as the argument. If files are located in a directory other than your current working directory, a file path is needed as the argument. A file path can also be provided in `--outdir` to nest the output files in a directory other than your current working directory.<br/><br/>
+**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.** If each file is located in your current working directory, then only the file name is needed as the function argument. If files are located in a directory other than your current working directory, a file path is needed as the argument. A file path can also be provided in `--outdir` to store the output files in a directory other than your current working directory.<br/><br/>
 
 ## Optional: Multithreading for divmigrate
 
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
-computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1. **Users can utilize more CPU resources by optionally flagging** `--threads`.  
-For example: `--run-divmigrate --threads 12`<br/><br/>
+computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1. **Users can utilize more CPU resources by optionally flagging** `--threads`.
+
+For example: 
+```bash
+--run-divmigrate --threads 12
+```
+<br/>
 
 ## Analyses
 
@@ -153,9 +158,9 @@ For example: `--run-divmigrate --threads 12`<br/><br/>
 &emsp;`--divmigrate-stat Nm`  
 
 &emsp;Outputs:
-   - migration matrices
-   - network plots
-   - summary files
+      - migration matrices
+      - network plots
+      - summary files
 
 &emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
 
