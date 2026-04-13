@@ -68,6 +68,7 @@ Files required for input in this pipeline are created by the *Populations* step 
 and identical population order.
 
 ### 1. Genepop files
+
    | File           | Purpose           |
    | -------------- | ----------------- |
    | `haps.genepop` | AMOVA             |
@@ -75,16 +76,19 @@ and identical population order.
 
 ### 2. Popmap (popmap.csv)
 &emsp;CSV file with two columns:
+
       ```csv
       Sample,Population
       LT-pop_01,Buxahatchee
       LT-pop_02,Buxahatchee
       ...
       ```
+
 &emsp;*Sample* is the name of the individual and *Population* is the population of origin.
 
 ### 3. FST (Fixation index) matrix (fst.csv)
 &emsp;CSV file with a square matrix:
+
       ```csv
       0,0.24,0.23,0.18
       0.24,0,0.19,0.13
@@ -94,6 +98,7 @@ and identical population order.
 
 ### 4. Geographic distance matrix (geo.csv)
 &emsp;CSV file with a square matrix:
+
       ```csv
       0,170.41,138.18,80.14
       170.41,0,77.68,90.25
