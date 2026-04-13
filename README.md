@@ -10,7 +10,7 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects<br/>
 
-####End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
+#### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
 
 ## Overview
 
@@ -127,7 +127,7 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.** If each file is located in your current working directory, then only the file name is needed as the function argument. If files are located in a directory other than your current working directory, a file path is needed as the argument. A file path can also be provided in `--outdir` to store the output files in a directory other than your current working directory.<br/><br/>
+**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.** If each file is located in your current working directory, then only the file name is needed as the function argument. If files are located in a directory other than your current working directory, a file path (e.g., snail_input_files/popmap.csv) is needed as the argument. A file path can also be provided in `--outdir` to store the output files in a directory other than your current working directory.<br/><br/>
 
 ## Optional: Multithreading for divmigrate
 
@@ -158,11 +158,12 @@ For example:
 &emsp;`--divmigrate-stat Nm`  
 
 &emsp;Outputs:
-      - migration matrices
-      - network plots
-      - summary files
+&emsp;- migration matrices  
+&emsp;- network plots  
+&emsp;- summary files  
 
-&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
+&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: 
+&emsp;https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
 
 ## References
 
