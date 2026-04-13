@@ -1,21 +1,24 @@
 # Population Genomics Pipeline
-<br/>
 
 ## Project goals
+
 In this project, we built a Python pipeline that connects commonly used population genomics analyses — AMOVA, DAPC, IBD, and divMigrate (using multiple SNPs per locus datasets) — into a single, streamlined script that can be imported as a module. While we already knew how to run the analyses individually, our goal was to learn how to string them together using Python, enabling faster and more reproducible results.
 
 ### Objectives
 1. Create a reproducible population genomics analysis workflow
 2. Use a Conda environment for transferable reproducibility
 3. Collaborate using git to create the pipeline
-4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects
+4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects  
+
 
 **End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
 
 ## Overview
+
 Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.<br/><br/>
 
 ## Workflow
+
 ```mermaid
 graph TD;
    A-->B
@@ -75,39 +78,43 @@ and identical population order.
    | `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
+
 &emsp;CSV file with two columns:
 
-      ```csv
-      Sample,Population
-      LT-pop_01,Buxahatchee
-      LT-pop_02,Buxahatchee
-      ...
-      ```
+   ```csv
+   Sample,Population
+   LT-pop_01,Buxahatchee
+   LT-pop_02,Buxahatchee
+   ...
+   ```
 
 &emsp;*Sample* is the name of the individual and *Population* is the population of origin.
 
 ### 3. FST (Fixation index) matrix (fst.csv)
+
 &emsp;CSV file with a square matrix:
 
-      ```csv
-      0,0.24,0.23,0.18
-      0.24,0,0.19,0.13
-      0.23,0.19,0,0.13
-      0.18,0.13,0.13,0
-      ```
+   ```csv
+   0,0.24,0.23,0.18
+   0.24,0,0.19,0.13
+   0.23,0.19,0,0.13
+   0.18,0.13,0.13,0
+   ```
 
 ### 4. Geographic distance matrix (geo.csv)
+
 &emsp;CSV file with a square matrix:
 
-      ```csv
-      0,170.41,138.18,80.14
-      170.41,0,77.68,90.25
-      138.18,77.68,0,57.79
-      80.14,90.25,57.79,0
-      ```
+   ```csv
+   0,170.41,138.18,80.14
+   170.41,0,77.68,90.25
+   138.18,77.68,0,57.79
+   80.14,90.25,57.79,0
+   ```
 <br/>
 
 ## Run the Pipeline
+
 ```bash
 python Pop_script_2.py \
   --haps-genepop populations.haps.genepop \
@@ -126,6 +133,7 @@ python Pop_script_2.py \
 **Any of the above analyses after** `--scripts-dir` **can be removed or run individually**<br/><br/>
 
 ## Optional: Multithreading for divmigrate
+
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
 computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1.
 
@@ -141,6 +149,7 @@ Example: `--run-divmigrate --threads 12`<br/><br/>
 ### 3. Isolation by Distance (IBD)
 
 ### 4. Migration Analysis (divmigrate)
+
 &emsp;Estimates directional gene flow
 
 &emsp;Options:  
@@ -153,14 +162,11 @@ Example: `--run-divmigrate --threads 12`<br/><br/>
    - network plots
    - summary files
 
-&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
-
-
+&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
 
 ## References
-1. Rochette, N. C., A. G. Rivera‐Colón, and J. M. Catchen. 2019. Stacks 2: Analytical methods for paired‐end sequencing improve RADseq‐based population genomics. Molecular Ecology 28(21):4737–4754.
 
-
+1. Rochette, N. C., A. G. Rivera‐Colón, and J. M. Catchen. 2019. Stacks 2: Analytical methods for paired‐end sequencing improve RADseq‐based population genomics. Molecular Ecology 28(21):4737–4754.<br/><br/>
 
 # Feedback
 
