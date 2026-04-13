@@ -127,15 +127,13 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.**<br/><br/>
+**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.** If each file is located in your current working directory, then only the file name is needed as the argument. If files are located in a directory other than your current working directory, a file path is needed as the argument. A file path can also be provided in `--outdir` to nest the output files in a directory other than your current working directory.<br/><br/>
 
 ## Optional: Multithreading for divmigrate
 
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
-computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1.
-
-**Users can utilize more CPU resources by optionally flagging** `--threads`  
-Example: `--run-divmigrate --threads 12`<br/><br/>
+computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1. **Users can utilize more CPU resources by optionally flagging** `--threads`.  
+For example: `--run-divmigrate --threads 12`<br/><br/>
 
 ## Analyses
 
@@ -155,9 +153,9 @@ Example: `--run-divmigrate --threads 12`<br/><br/>
 &emsp;`--divmigrate-stat Nm`  
 
 &emsp;Outputs:
-&emsp;- migration matrices
-&emsp;- network plots
-&emsp;- summary files
+   - migration matrices
+   - network plots
+   - summary files
 
 &emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
 
