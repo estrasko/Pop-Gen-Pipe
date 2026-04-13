@@ -155,11 +155,15 @@ def run_dapc(
     popmap: Path,
     outdir: Path,
     scripts_dir: Path,
+    pop_colors_csv: Path | None = None,
 ) -> None:
     """Run DAPC using the multi-SNP-per-locus genepop file."""
+    args = [str(multi_snp_genepop), str(popmap), str(outdir)]
+    if pop_colors_csv is not None:
+        args.append(str(pop_colors_csv))
     run_r_script(
         scripts_dir / "run_dapc.R",
-        [str(multi_snp_genepop), str(popmap), str(outdir)],
+        args,
     )
 
 
@@ -193,7 +197,7 @@ def run_divmigrate(
     run_r_script(scripts_dir / "run_divmigrate.R", args)
 
 
-#---- Main pipeline functions ----
+#---- Pipeline arguments ----
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments for the pipeline."""
     parser = argparse.ArgumentParser(
@@ -228,6 +232,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--summary-stats-csv",
         help="Optional summary statistics CSV for downstream regressions in IBD.",
+    )
+    parser.add_argument(
+    "--pop-colors-csv",
+    help="Optional CSV mapping Population to plotting color. R color friendly by R color name or code! (ex: cornflowerblue or #6495ED",
     )
     parser.add_argument(
         "--outdir",
@@ -280,6 +288,7 @@ def main() -> int:
     original_popmap = Path(args.popmap)
     fst_csv = Path(args.fst_csv)
     geo_csv = Path(args.geo_csv)
+    pop_colors_csv = Path(args.pop_colors_csv) if args.pop_colors_csv else None
     summary_stats_csv = Path(args.summary_stats_csv) if args.summary_stats_csv else None
     outdir = Path(args.outdir)
     scripts_dir = Path(args.scripts_dir)
@@ -299,6 +308,9 @@ def main() -> int:
     validate_file(scripts_dir / "run_dapc.R", "DAPC R script")
     validate_file(scripts_dir / "run_ibd.R", "IBD R script")
     validate_file(scripts_dir / "run_divmigrate.R", "divMigrate R script")
+
+    if pop_colors_csv is not None:
+        validate_file(pop_colors_csv, "Populations colors CSV")
 
     if summary_stats_csv is not None:
         validate_file(summary_stats_csv, "Summary statistics CSV")
@@ -330,7 +342,7 @@ def main() -> int:
 
         if args.run_dapc:
             logging.info("Running DAPC...")
-            run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir)
+            run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
 
         if args.run_ibd:
             logging.info("Running IBD...")
