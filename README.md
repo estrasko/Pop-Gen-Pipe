@@ -130,15 +130,16 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 ### 1. Analysis of Molecular Variance (AMOVA)
 
-&emsp;Partitions variaiton among and within populations  
+&emsp;Partitions variation within samples (individuals), between individuals within the population, and between populations  
 
 &emsp;Outputs:  
-&emsp;- permutation test plots  
-&emsp;- summary files  
+&emsp;- permutation test plot  
+&emsp;- summary statistics file  
 
 ### 2. Discriminant Analysis of Principal Components (DAPC)
 
-&emsp;Identifies and describes clusters  
+&emsp;Creates clusters of individuals sharing similar genetic data. Data is transformed using a Principal Component Analysis (PCA) and subsequently clustered using discriminant analysis (DA). This is a multivariate method requiring no a-priori knowledge.
+[Learn more about DAPC.](https://grunwaldlab.github.io/Population_Genetics_in_R/DAPC.html#:~:text=Discriminant%20analysis%20of%20principal%20components%20(DAPC))  
 
 &emsp;Outputs:  
 &emsp;- assignment plot  
@@ -203,6 +204,7 @@ For example:
 ## References
 
 1. Rochette, N. C., A. G. Rivera‐Colón, and J. M. Catchen. 2019. Stacks 2: Analytical methods for paired‐end sequencing improve RADseq‐based population genomics. Molecular Ecology 28(21):4737–4754.<br/><br/>
+2. Thia, J.A. (2023). Guidelines for standardizing the application of discriminant analysis of principal components to genotype data. Molecular Ecology Resources, 23(3), 523–538. https://doi.org/10.1111/1755-0998.13706
 
 # Feedback
 
