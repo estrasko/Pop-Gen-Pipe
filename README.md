@@ -10,6 +10,7 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects<br/>
 
+
 #### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
 
 ## Overview
@@ -67,8 +68,7 @@ graph TD;
 Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1</sup>.
 
 > [!IMPORTANT]
-> **All input files must have populations in the same order!**
-> Critically, FST and geo matrices must have identical dimensions and identical population order.
+> **All input files must have populations in the same order!** Critically, FST and geo matrices must have identical dimensions and identical population order.
 
 ### 1. Genepop files
 
@@ -159,13 +159,13 @@ For example:
 &emsp;`--divmigrate-stat D`  
 &emsp;`--divmigrate-stat Nm`  
 
-&emsp;Outputs:
+&emsp;Outputs:  
 &emsp;- migration matrices  
 &emsp;- network plots  
 &emsp;- summary files  
 
-&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: 
-&emsp;https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
+&emsp;divmigrate is part of the diveRsity package. [Learn more about divmigrate from the developers.](https://github.com/kkeenan02/diveRsity/tree/master)
+<br/>
 
 ## References
 
