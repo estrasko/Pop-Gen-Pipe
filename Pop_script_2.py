@@ -142,11 +142,20 @@ def run_r_script(script_path: Path, args: list[str]) -> None:
     subprocess.run(cmd, check=True)
 
 
-def run_amova(haps_genepop: Path, popmap: Path, outdir: Path, scripts_dir: Path) -> None:
+def run_amova(
+    haps_genepop: Path,
+    popmap: Path,
+    outdir: Path,
+    scripts_dir: Path,
+    pop_colors_csv: Path | None = None,
+) -> None:
     """Run AMOVA using the haplotype genepop file."""
+    args = [str(haps_genepop), str(popmap), str(outdir)]
+    if pop_colors_csv is not None:
+        args.append(str(pop_colors_csv))
     run_r_script(
         scripts_dir / "run_amova.R",
-        [str(haps_genepop), str(popmap), str(outdir)],
+        args,
     )
 
 
@@ -155,11 +164,15 @@ def run_dapc(
     popmap: Path,
     outdir: Path,
     scripts_dir: Path,
+    pop_colors_csv: Path | None = None,
 ) -> None:
     """Run DAPC using the multi-SNP-per-locus genepop file."""
+    args = [str(multi_snp_genepop), str(popmap), str(outdir)]
+    if pop_colors_csv is not None:
+        args.append(str(pop_colors_csv))
     run_r_script(
         scripts_dir / "run_dapc.R",
-        [str(multi_snp_genepop), str(popmap), str(outdir)],
+        args,
     )
 
 
@@ -169,6 +182,7 @@ def run_ibd(
     outdir: Path,
     scripts_dir: Path,
     summary_stats_csv: Path | None = None,
+    pop_colors_csv: Path | None = None,
 ) -> None:
     """Run IBD analyses from Fst and geographic distance matrices."""
     args = [str(fst_csv), str(geographic_distance_csv), str(outdir)]
@@ -185,15 +199,22 @@ def run_divmigrate(
     boots: int,
     threads: int,
     node_names: str | None = None,
+    pop_colors_csv: Path | None = None,
 ) -> None:
     """Run divMigrate on the multi-SNP-per-locus genepop file."""
     args = [str(multi_snp_genepop), str(outdir), stat, str(boots), str(threads)]
-    if node_names is not None:
-        args.append(node_names)
+
+    # Keep node names and color-file positions stable for the R script.
+    # If colors are provided but node names are not, pass a placeholder.
+    if node_names is not None or pop_colors_csv is not None:
+        args.append(node_names if node_names is not None else "__NONE__")
+    if pop_colors_csv is not None:
+        args.append(str(pop_colors_csv))
+
     run_r_script(scripts_dir / "run_divmigrate.R", args)
 
 
-#---- Main pipeline functions ----
+#---- Pipeline arguments ----
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments for the pipeline."""
     parser = argparse.ArgumentParser(
@@ -228,6 +249,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--summary-stats-csv",
         help="Optional summary statistics CSV for downstream regressions in IBD.",
+    )
+    parser.add_argument(
+    "--pop-colors-csv",
+    help="Optional CSV mapping Population to plotting color. R-friendly names or hex codes both work (for example: cornflowerblue or #6495ED).",
     )
     parser.add_argument(
         "--outdir",
@@ -280,6 +305,7 @@ def main() -> int:
     original_popmap = Path(args.popmap)
     fst_csv = Path(args.fst_csv)
     geo_csv = Path(args.geo_csv)
+    pop_colors_csv = Path(args.pop_colors_csv) if args.pop_colors_csv else None
     summary_stats_csv = Path(args.summary_stats_csv) if args.summary_stats_csv else None
     outdir = Path(args.outdir)
     scripts_dir = Path(args.scripts_dir)
@@ -299,6 +325,9 @@ def main() -> int:
     validate_file(scripts_dir / "run_dapc.R", "DAPC R script")
     validate_file(scripts_dir / "run_ibd.R", "IBD R script")
     validate_file(scripts_dir / "run_divmigrate.R", "divMigrate R script")
+
+    if pop_colors_csv is not None:
+        validate_file(pop_colors_csv, "Population colors CSV")
 
     if summary_stats_csv is not None:
         validate_file(summary_stats_csv, "Summary statistics CSV")
@@ -326,15 +355,15 @@ def main() -> int:
     try:
         if args.run_amova:
             logging.info("Running AMOVA...")
-            run_amova(haps_genepop, corrected_popmap, dirs["amova"], scripts_dir)
+            run_amova(haps_genepop, corrected_popmap, dirs["amova"], scripts_dir, pop_colors_csv)
 
         if args.run_dapc:
             logging.info("Running DAPC...")
-            run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir)
+            run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
 
         if args.run_ibd:
             logging.info("Running IBD...")
-            run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv)
+            run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv, pop_colors_csv)
 
         if args.run_divmigrate:
             logging.info("Running divMigrate...")
@@ -347,6 +376,7 @@ def main() -> int:
                 args.divmigrate_boots,
                 args.threads,
                 args.divmigrate_node_names,
+                pop_colors_csv,
             )
 
     except subprocess.CalledProcessError as error:
@@ -362,3 +392,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+

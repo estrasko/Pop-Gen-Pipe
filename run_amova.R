@@ -8,14 +8,15 @@ suppressPackageStartupMessages({
 # Capture the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) < 3) {
-  stop("Missing arguments. Expected 3, got ", length(args),
-     ".\nUsage: Rscript run_amova.R <haps_genepop> <popmap_file> <outdir>")
+if (!(length(args) %in% c(3, 4))) {
+  stop("Missing arguments. Expected 3 or 4, got ", length(args),
+     ".\nUsage: Rscript run_amova.R <haps_genepop> <popmap_file> <outdir> [pop_colors_csv]")
 }
 
 input_file <- args[1]
 popmap_file <- args[2]
 outdir <- args[3]
+pop_colors_file <- if (length(args) == 4) args[4] else NA
 
 # Create directory to store output files
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
@@ -76,6 +77,48 @@ genclone_obj <- as.genclone(genind_obj)
 
 # Label samples in genclone object by population using the popmap file
 strata(genclone_obj) <- data.frame(Population = popmap_df$Population)
+
+# If a population color file is provided, validate it and save a copy with the AMOVA output.
+# The AMOVA randtest plot is not population-specific, so the colors are documented rather than plotted.
+if (!is.na(pop_colors_file)) {
+  cat("Reading population colors...\n")
+  color_df <- read.csv(pop_colors_file, stringsAsFactors = FALSE)
+
+  if (!all(c("Population", "Color") %in% names(color_df))) {
+    stop("Population colors CSV must contain columns named 'Population' and 'Color'.")
+  }
+
+  if (anyDuplicated(color_df$Population)) {
+    stop("Population colors CSV contains duplicate Population entries.")
+  }
+
+  pop_levels <- sort(unique(as.character(popmap_df$Population)))
+  color_lookup <- setNames(color_df$Color, color_df$Population)
+
+  missing_colors <- setdiff(pop_levels, names(color_lookup))
+  if (length(missing_colors) > 0) {
+    stop(
+      paste0(
+        "Missing colors for populations: ",
+        paste(missing_colors, collapse = ", ")
+      )
+    )
+  }
+
+  write.csv(
+    color_df,
+    file = file.path(outdir, "amova_population_colors.csv"),
+    row.names = FALSE
+  )
+
+  writeLines(
+    c(
+      "Population colors were validated successfully.",
+      "The AMOVA randtest plot is not population-specific, so colors were documented but not applied to the plot."
+    ),
+    con = file.path(outdir, "amova_color_info.txt")
+  )
+}
 
 cat("Running AMOVA...\n")
 amova_result <- poppr.amova(

@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+# Load packages
 suppressPackageStartupMessages({
   library(vegan)
   library(ecodist)
@@ -8,18 +9,22 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 
-
-if (!(length(args) %in% c(3, 4))) {
-  stop("Usage: Rscript run_ibd.R <fst_csv> <distance_csv> <outdir> [summary_stats_csv]")
+# Check number of arguments
+if (!(length(args) %in% c(3, 4, 5))) {
+  stop("Usage: Rscript run_ibd.R <fst_csv> <distance_csv> <outdir> [summary_stats_csv] [pop_colors_csv]")
 }
 
+# Assign inputs
 fst_file <- args[1]
 distance_file <- args[2]
 outdir <- args[3]
-summary_stats_file <- if (length(args) == 4) args[4] else NA
+summary_stats_file <- if (length(args) >= 4) args[4] else NA
+pop_colors_file <- if (length(args) == 5) args[5] else NA
 
+# Create output directory if it doesn't exist
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
+# Read Fst matrix and geographic distance matrix
 cat("Reading Fst matrix...\n")
 fst_df <- read.csv(fst_file, header = FALSE, check.names = FALSE)
 fst_mat <- as.matrix(fst_df)
@@ -27,6 +32,37 @@ fst_mat <- as.matrix(fst_df)
 cat("Reading geographic distance matrix...\n")
 distance_df <- read.csv(distance_file, header = FALSE, check.names = FALSE)
 geo_mat <- as.matrix(distance_df)
+
+# If a population color file is provided, validate it and document current limitations.
+# The current fst.csv and geo.csv inputs are unlabeled matrices, so population-specific
+# colors cannot be mapped safely to pairwise points without explicit population names.
+if (!is.na(pop_colors_file)) {
+  cat("Reading population colors...\n")
+  color_df <- read.csv(pop_colors_file, stringsAsFactors = FALSE)
+
+  if (!all(c("Population", "Color") %in% names(color_df))) {
+    stop("Population colors CSV must contain columns named 'Population' and 'Color'.")
+  }
+
+  if (anyDuplicated(color_df$Population)) {
+    stop("Population colors CSV contains duplicate Population entries.")
+  }
+
+  write.csv(
+    color_df,
+    file = file.path(outdir, "ibd_population_colors.csv"),
+    row.names = FALSE
+  )
+
+  writeLines(
+    c(
+      "Population colors were validated successfully.",
+      "The current IBD plot was not recolored because fst.csv and geo.csv are unlabeled matrices.",
+      "To apply population colors to IBD pairwise plots, the matrices must include explicit population names or a separate population-order file."
+    ),
+    con = file.path(outdir, "ibd_color_info.txt")
+  )
+}
 
 #Checking to make sure there's enough populations to run IBD
 n_pop <- nrow(fst_mat)
@@ -43,7 +79,7 @@ if (n_pop <3) {
 }
 
 
-# Basic validation
+# Basic validation, validate matrices
 if (nrow(fst_mat) != ncol(fst_mat)) {
   stop("fst.csv must be a square matrix.")
 }
@@ -56,9 +92,12 @@ if (!all(dim(fst_mat) == dim(geo_mat))) {
   stop("fst.csv and geo.csv must have the same dimensions.")
 }
 
+# Convert to distance objects
+
 fst_dist <- as.dist(fst_mat)
 geo_dist <- as.dist(geo_mat)
 
+# Mantel test (IBD analysis)
 cat("Running Mantel test...\n")
 mantel_result <- vegan::mantel(
   geo_dist,
@@ -67,14 +106,18 @@ mantel_result <- vegan::mantel(
   permutations = 1000
 )
 
+# Running MRM (Multiple Regression on distance matrices)
+
 cat("Running MRM...\n")
 mrm_result <- MRM(fst_dist ~ geo_dist, method = "linear", mrank = FALSE)
 
+# Save outputs
 capture.output(
   mantel_result,
   file = file.path(outdir, "mantel_result.txt")
 )
 
+# Save outputs 
 capture.output(
   mrm_result,
   file = file.path(outdir, "mrm_result.txt")

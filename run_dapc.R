@@ -8,14 +8,14 @@ suppressPackageStartupMessages({
 # Capture the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) < 3) {
-  stop("Missing arguments. Expected 3, got ", length(args),
-     ".\nUsage: Rscript run_dapc.R <multi_snp_genepop> <popmap_file> <outdir>")
+if (!(length(args) %in% c(3,4))) {
+  stop("Usage: Rscript run_dapc.R <multi_snp_genepop> <popmap_file> <outdir> [pop_colors_csv]")
 }
 
 input_file <- args[1]
 popmap_file <- args[2]
 outdir <- args[3]
+pop_colors_file <- if (length(args) == 4) args[4] else NA
 
 # Create directory to store output files
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
@@ -73,6 +73,44 @@ if (!is.null(genepop_samples) && "Sample" %in% names(popmap_df)) {
 
 # Label samples in genind object by population using the popmap file
 pop(genind_obj) <- as.factor(popmap_df$Population)
+
+# Optional color support
+custom_colors <- NULL
+ind_colors <- NULL
+grp_colors <- NULL
+
+if (!is.na(pop_colors_file)) {
+  cat("Reading population colors...\n")
+  color_df <- read.csv(pop_colors_file, stringsAsFactors = FALSE)
+
+  if (!all(c("Population", "Color") %in% names(color_df))) {
+    stop("Population colors CSV must contain columns named 'Population' and 'Color'.")
+  }
+
+  if (anyDuplicated(color_df$Population)) {
+    stop("Population colors CSV contains duplicate Population entries.")
+  }
+
+  pop_levels <- levels(pop(genind_obj))
+  color_lookup <- setNames(color_df$Color, color_df$Population)
+
+  missing_colors <- setdiff(pop_levels, names(color_lookup))
+  if (length(missing_colors) > 0) {
+    stop(
+      paste0(
+        "Missing colors for populations: ",
+        paste(missing_colors, collapse = ", ")
+      )
+    )
+  }
+
+  custom_colors <- color_lookup
+  grp_colors <- unname(custom_colors[pop_levels])
+  ind_colors <- unname(custom_colors[as.character(pop(genind_obj))])
+
+  cat("Using custom population colors:\n")
+  print(data.frame(Population = pop_levels, Color = grp_colors))
+}
 
 # Determine maximum number of PCA components based on your dataset
 max_pca_allowed <- min(
@@ -144,21 +182,33 @@ capture.output(
 saveRDS(xval_obj, file = file.path(outdir, "dapc_xval_result.rds"))
 saveRDS(dapc_result, file = file.path(outdir, "dapc_result.rds"))
 
-png(
+# Build custom DAPC scatter plot
+dapc_plot_df <- data.frame(
+  LD1 = dapc_result$ind.coord[, 1],
+  LD2 = dapc_result$ind.coord[, 2],
+  Population = as.factor(pop(genind_obj))
+)
+
+p <- ggplot(dapc_plot_df, aes(x = LD1, y = LD2, color = Population)) +
+  geom_point(size = 3, alpha = 0.8) +
+  theme_bw() +
+  labs(
+    x = "Discriminant Function 1",
+    y = "Discriminant Function 2",
+    title = "DAPC Scatter Plot"
+  )
+
+if (!is.null(custom_colors)) {
+  p <- p + scale_color_manual(values = custom_colors)
+}
+
+ggsave(
   filename = file.path(outdir, "dapc_scatter.png"),
-  width = 2200,
-  height = 1800,
-  res = 300
+  plot = p,
+  width = 8,
+  height = 6,
+  dpi = 300
 )
-scatter(
-  dapc_result,
-  scree.da = TRUE,
-  posi.da = "bottomleft",
-  cell = 0,
-  cstar = 0,
-  clab = 0
-)
-dev.off()
 
 png(
   filename = file.path(outdir, "dapc_assignplot.png"),
@@ -166,7 +216,9 @@ png(
   height = 1600,
   res = 300
 )
+
 assignplot(dapc_result)
+
 dev.off()
 
 cat("DAPC complete.\n")

@@ -10,19 +10,18 @@ suppressPackageStartupMessages({
 #Reads command line arguments from Pop_Script_2.py into R
 args <- commandArgs(trailingOnly = TRUE)
 
-#Check that all required files to run analyses are included in the run code
-if (!(length(args) %in% c(5, 6))) {
-  stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv]")
+if (!(length(args) %in% c(5, 6, 7))) {
+  stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv] [pop_colors_csv]")
 }
 
-input_file <- args[1] #names multi_snp_genepop file as input
-outdir <- args[2] #outdir is the included path
-stat <- args[3] #String argument
-boots <- as.integer(args[4]) #Assign bootstrap value (integer)
-threads <- as.integer(args[5]) #number of threads defined in command
-node_names_arg <- if (length(args) == 6) args[6] else NA #Make sure number of arguments pass is 6, otherwise report NA
+input_file <- args[1]
+outdir <- args[2]
+stat <- args[3]
+boots <- as.integer(args[4])
+threads <- as.integer(args[5])
+node_names_arg <- if (length(args) >= 6 && args[6] != "__NONE__") args[6] else NA
+pop_colors_file <- if (length(args) == 7) args[7] else NA
 
-#Create output directory for this script
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
 #Check point for threads to be a number greater than 1
@@ -85,6 +84,31 @@ if (!is.na(node_names_arg)) {
   }
 }
 
+# If a population color file is provided, validate it and use the first color
+# as a single default node color for the whole divMigrate network.
+node_color <- "lightblue"
+
+if (!is.na(pop_colors_file)) {
+  cat("Reading population colors...\n")
+  color_df <- read.csv(pop_colors_file, stringsAsFactors = FALSE)
+
+  if (!all(c("Population", "Color") %in% names(color_df))) {
+    stop("Population colors CSV must contain columns named 'Population' and 'Color'.")
+  }
+
+  if (nrow(color_df) < 1) {
+    stop("Population colors CSV must contain at least one row.")
+  }
+
+  node_color <- color_df$Color[1]
+
+  write.csv(
+    color_df,
+    file = file.path(outdir, "divmigrate_population_colors.csv"),
+    row.names = FALSE
+  )
+}
+
 write.csv(
   round(gmat, 3),
   file = file.path(outdir, "divmigrate_relative_migration_matrix.csv"),
@@ -112,7 +136,10 @@ qgraph(
   gmat,
   labels = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
   edge.labels = TRUE,
-  curve = 0.8
+  curve = 0.8,
+  color = "white",
+  edge.color = node_color,        
+  label.color = "black"
 )
 dev.off()
 
@@ -127,7 +154,10 @@ qgraph(
   gmat,
   labels = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
   edge.labels = TRUE,
-  curve = 0.8
+  curve = 0.8,
+  color = "white",
+  edge.color = node_color,
+  label.color = "black"
 )
 dev.off()
 
