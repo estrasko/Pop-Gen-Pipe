@@ -1,4 +1,33 @@
-2026-04-11 18:05:43,804 - INFO - Starting population genetics pipeline.
-2026-04-11 18:05:43,805 - INFO - Output directory: mussel_input_files
-2026-04-11 18:07:28,957 - INFO - Starting population genetics pipeline.
-2026-04-11 18:07:28,957 - INFO - Output directory: mussel_input_files
+2026-04-12 12:37:25,695 - INFO - Starting population genetics pipeline.
+2026-04-12 12:37:25,695 - INFO - Output directory: mussel_input_files
+2026-04-12 12:37:25,696 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 12:38:41,144 - INFO - Starting population genetics pipeline.
+2026-04-12 12:38:41,144 - INFO - Output directory: mussel_input_files
+2026-04-12 12:38:41,144 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 12:39:32,161 - INFO - Starting population genetics pipeline.
+2026-04-12 12:39:32,161 - INFO - Output directory: mussel_input_files
+2026-04-12 12:39:32,161 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 12:39:32,173 - INFO - Wrote corrected popmap to: mussel_input_files/popmap_corrected.csv
+2026-04-12 12:39:32,173 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-12 12:39:32,179 - INFO - Wrote corrected popmap to: mussel_input_files/popmap_corrected.csv
+2026-04-12 12:39:32,179 - INFO - Running AMOVA...
+2026-04-12 12:39:32,179 - INFO - Running command: Rscript run_amova.R mussel_input_files/populations.haps.genepop mussel_input_files/popmap_corrected.csv mussel_input_files/amova
+2026-04-12 12:39:49,269 - INFO - Running DAPC...
+2026-04-12 12:39:49,270 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/popmap_corrected.csv mussel_input_files/dapc
+2026-04-12 12:40:59,332 - INFO - Running IBD...
+2026-04-12 12:40:59,332 - INFO - Running command: Rscript run_ibd.R mussel_input_files/fst.csv mussel_input_files/geo.csv mussel_input_files/ibd
+2026-04-12 12:41:01,127 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 337, in main
+    run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 177, in run_ibd
+    run_r_script(scripts_dir / "run_ibd.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_ibd.R', 'mussel_input_files/fst.csv', 'mussel_input_files/geo.csv', 'mussel_input_files/ibd']' returned non-zero exit status 1.
