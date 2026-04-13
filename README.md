@@ -30,8 +30,8 @@ graph TD;
    - divMigrate (gene flow)"]
    C-->D
    D["Structured output directories & plots"]
-```  
-
+```
+<br/><br/>
 
 ## Installation  
 
@@ -57,8 +57,8 @@ graph TD;
    1. Activate your new environment: 
       ```bash
       conda activate Pop-Gen-PipeEnv
-      ```  
-
+      ```
+<br/><br/>
 
 ## Required Input Files  
 
@@ -68,23 +68,23 @@ Files required for input in this pipeline are created by the *Populations* step 
 and identical population order.
 
 ### 1. Genepop files
-   | File           | Purpose           |
-   | -------------- | ----------------- |
-   | `haps.genepop` | AMOVA             |
-   | `snps.genepop` | DAPC + divMigrate |
+&emsp;| File           | Purpose           |
+&emsp;| -------------- | ----------------- |
+&emsp;| `haps.genepop` | AMOVA             |
+&emsp;| `snps.genepop` | DAPC + divMigrate |
 
 ### 2. Popmap (popmap.csv)
-   CSV file with:
+&emsp;CSV file with two columns:
    ```csv
    Sample,Population
    LT-pop_01,Buxahatchee
    LT-pop_02,Buxahatchee
    ...
    ```
-   *Sample* is the name of the individual and *Population* is the population of origin (comma separated values).
+&emsp;*Sample* is the name of the individual and *Population* is the population of origin.
 
 ### 3. FST (Fixation index) matrix (fst.csv)
-   Square matrix:
+&emsp;CSV file with a square matrix:
    ```csv
    0,0.24,0.23,0.18
    0.24,0,0.19,0.13
@@ -93,14 +93,14 @@ and identical population order.
    ```
 
 ### 4. Geographic distance matrix (geo.csv)
-   Square matrix:
+&emsp;CSV file with a square matrix:
    ```csv
    0,170.41,138.18,80.14
    170.41,0,77.68,90.25
    138.18,77.68,0,57.79
    80.14,90.25,57.79,0
    ```
-
+<br/><br/>
 
 ## Run the Pipeline
 ```bash
@@ -118,22 +118,14 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after `--scripts-dir` can be removed or run individually**
-
-
+**Any of the above analyses after** `--scripts-dir` **can be removed or run individually**<br/><br/>
 
 ## Optional: Multithreading for divmigrate
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
 computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1.
 
-**Users can utilize more CPU resources by optionally flagging --threads <N>**
-
-Example: 
-`--run-divmigrate --threads 12`
-
-**NOTE: Threading is only available in divmigrate, not the other tests. The others don't need it**
-
-
+**Users can utilize more CPU resources by optionally flagging** `--threads`  
+Example: `--run-divmigrate --threads 12`<br/><br/>
 
 ## Analyses
 
@@ -144,19 +136,19 @@ Example:
 ### 3. Isolation by Distance (IBD)
 
 ### 4. Migration Analysis (divmigrate)
-   Estimates directional gene flow
+&emsp;Estimates directional gene flow
 
-   Options:
-   --divmigrate-stat gst
-   --divmigrate-stat D
-   --divmigrate-stat Nm
+&emsp;Options:  
+&emsp;`--divmigrate-stat gst`
+&emsp;`--divmigrate-stat D`
+&emsp;`--divmigrate-stat Nm`
 
-   Outputs:
+&emsp;Outputs:
    - migration matrices
    - network plots
    - summary files
 
-   divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
+&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master
 
 
 
