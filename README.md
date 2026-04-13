@@ -10,7 +10,8 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects<br/>
 
-**End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
+
+#### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
 
 ## Overview
 
@@ -41,7 +42,7 @@ graph TD;
    ```bash
    git clone https://github.com/estrasko/Pop-Gen-Pipe.git
    ```
-   > NOTE: You can also fork the repository and work that way.
+   > Note: You can also fork the repository and work that way.
 
 2. Move to the directory: 
    ```bash
@@ -66,7 +67,8 @@ graph TD;
 
 Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1</sup>.
 
-> *NOTE: ALL INPUT FILES MUST HAVE POPULATIONS IN THE SAME ORDER!* Critically, FST and geo matrices must have identical dimensions and identical population order.
+> [!IMPORTANT]
+> **All input files must have populations in the same order!** Critically, FST and geo matrices must have identical dimensions and identical population order.
 
 ### 1. Genepop files
 
@@ -110,6 +112,50 @@ Files required for input in this pipeline are created by the *Populations* step 
    ```
    <br/>
 
+## Analyses
+
+### 1. Analysis of Molecular Variance (AMOVA)
+
+&emsp;Partitions variaiton among and within populations  
+
+&emsp;Outputs:  
+&emsp;- permutation test plots  
+&emsp;- summary files  
+
+### 2. Discriminant Analysis of Principal Components (DAPC)
+
+&emsp;Identifies and describes clusters  
+
+&emsp;Outputs:  
+&emsp;- assignment plot  
+&emsp;- scatter plot  
+&emsp;- summary files  
+
+### 3. Isolation by Distance (IBD)
+
+&emsp;Tests for distance-limited gene flow
+
+&emsp;Outputs:  
+&emsp;- FST vs. distance plot  
+&emsp;- summary files  
+
+### 4. Migration Analysis (divmigrate)
+
+&emsp;Estimates directional gene flow
+
+&emsp;Options:  
+&emsp;`--divmigrate-stat gst`  
+&emsp;`--divmigrate-stat D`  
+&emsp;`--divmigrate-stat Nm`  
+
+&emsp;Outputs:  
+&emsp;- migration matrices  
+&emsp;- network plots  
+&emsp;- summary files  
+
+&emsp;divmigrate is part of the diveRsity package. [Learn more about divmigrate from the developers.](https://github.com/kkeenan02/diveRsity/tree/master)
+<br/><br/>
+
 ## Run the Pipeline
 
 ```bash
@@ -127,39 +173,18 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.**<br/><br/>
+**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.** If each file is located in your current working directory, then only the file name is needed as the function argument. If files are located in a directory other than your current working directory, a file path (e.g., snail_input_files/popmap.csv) is needed as the argument. A file path can also be provided in `--outdir` to store the output files in a directory other than your current working directory.<br/><br/>
 
 ## Optional: Multithreading for divmigrate
 
 This pipeline was created to run on personal laptops, clusters, or whatever you have to work with. The only occasional
-computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1.
+computationally expensive program is divmigrate. If no threading option is specified, the default is threads = 1. **Users can utilize more CPU resources by optionally flagging** `--threads`.
 
-**Users can utilize more CPU resources by optionally flagging** `--threads`  
-Example: `--run-divmigrate --threads 12`<br/><br/>
-
-## Analyses
-
-### 1. Analysis of Molecular Variance (AMOVA)
-
-### 2. Discriminant Analysis of Principal Components (DAPC)
-
-### 3. Isolation by Distance (IBD)
-
-### 4. Migration Analysis (divmigrate)
-
-&emsp;Estimates directional gene flow
-
-&emsp;Options:  
-&emsp;`--divmigrate-stat gst`  
-&emsp;`--divmigrate-stat D`  
-&emsp;`--divmigrate-stat Nm`  
-
-&emsp;Outputs:
-&emsp;- migration matrices
-&emsp;- network plots
-&emsp;- summary files
-
-&emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
+For example: 
+```bash
+--run-divmigrate --threads 12
+```
+<br/>
 
 ## References
 
