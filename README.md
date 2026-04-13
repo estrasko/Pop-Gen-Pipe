@@ -10,12 +10,10 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects
 
-### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.  
-
+### End Goal: Produce quality population genomic figures and analyses results reproducable for publication.<br/><br/>
 
 ## Overview
-Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.  
-
+Python is the master program for this pipeline handling file management, validaiton, and orchestration of runs, including calling R for running the analyses and plotting the results. All analyses within the pipeline are in the R programming language and can be run individually as functions. The pipeline script is importable as a Python module.<br/><br/>
 
 ## Workflow  
 ```mermaid
