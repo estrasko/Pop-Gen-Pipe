@@ -10,18 +10,20 @@ suppressPackageStartupMessages({
 #Reads command line arguments from Pop_Script_2.py into R
 args <- commandArgs(trailingOnly = TRUE)
 
+#Checks to make sure you've included enough arguments in original Pop_script.py run commmand
 if (!(length(args) %in% c(5, 6, 7))) {
   stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv] [pop_colors_csv]")
 }
 
-input_file <- args[1]
-outdir <- args[2]
-stat <- args[3]
-boots <- as.integer(args[4])
-threads <- as.integer(args[5])
+input_file <- args[1] #assigns multip_snp_genepop as input file
+outdir <- args[2] #assigns designated path as the output directory
+stat <- args[3] #Stores 3rd arguement (stat) as a string
+boots <- as.integer(args[4]) #Stores seed value as an integer
+threads <- as.integer(args[5]) #Stores thread count as integer
 node_names_arg <- if (length(args) >= 6 && args[6] != "__NONE__") args[6] else NA
-pop_colors_file <- if (length(args) == 7) args[7] else NA
+pop_colors_file <- if (length(args) == 7) args[7] else NA #Identifies if color options are included, otherwise passed with NA
 
+#Creates output directory
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
 #Check point for threads to be a number greater than 1
@@ -29,7 +31,7 @@ if (is.na(threads) || threads < 1) {
   stop("threads must be an integer >= 1")
 }
 
-
+#Messages printed during run
 cat("Running divMigrate...\n")
 cat(paste0("Statistic: ", stat, "\n"))
 cat(paste0("Bootstrap replicates: ", boots, "\n"))
@@ -44,13 +46,14 @@ use_parallel <- threads > 1
 cat(paste0("Parallel enabled: ", use_parallel, "\n"))
 
 results <- divMigrate(
-  infile = temp_gen_file,
-  stat = stat,
-  plot_network = FALSE,
-  boots = boots,
-  para = use_parallel
+  infile = temp_gen_file, #Reads in temporary .gen copy
+  stat = stat, #inputs genetic differentiation statistic
+  plot_network = FALSE, #Does not auto plot outputs
+  boots = boots, #Sets bootstrap iterations
+  para = use_parallel #Utilizes threads
 )
 
+#Saves nmRelMig object as csv
 if (!is.null(results$nmRelMig)) {
   write.csv(
     results$nmRelMig,
@@ -59,6 +62,7 @@ if (!is.null(results$nmRelMig)) {
   )
 }
 
+#Saves nmRelMigSig as csv
 if (!is.null(results$nmRelMigSig)) {
   write.csv(
     results$nmRelMigSig,
@@ -67,6 +71,7 @@ if (!is.null(results$nmRelMigSig)) {
   )
 }
 
+#Saves relative migration matrix Gst (gRelMig) to CSV otherwise prints error
 if (!is.null(results$gRelMig)) {
   gmat <- results$gRelMig
 } else if (!is.null(results$nmRelMig)) {
@@ -102,6 +107,7 @@ if (!is.na(pop_colors_file)) {
 
   node_color <- color_df$Color[1]
 
+#Write out csv files for relative migration matrixes, population colors, plotted divmigrate network png
   write.csv(
     color_df,
     file = file.path(outdir, "divmigrate_population_colors.csv"),
@@ -161,11 +167,14 @@ qgraph(
 )
 dev.off()
 
+#Prints console outputs to output directory
 capture.output(
   results,
   file = file.path(outdir, "divmigrate_summary.txt")
 )
 
+#Save R object results to .rds file to output directory
 saveRDS(results, file = file.path(outdir, "divmigrate_result.rds"))
 
+#Message confirming completion of the analysis
 cat("divMigrate complete.\n")
