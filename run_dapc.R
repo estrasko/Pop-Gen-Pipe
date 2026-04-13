@@ -183,7 +183,7 @@ saveRDS(xval_obj, file = file.path(outdir, "dapc_xval_result.rds"))
 saveRDS(dapc_result, file = file.path(outdir, "dapc_result.rds"))
 
 #Added code accounts for one discriminat function axis
-coord <- as.matrix(dapc_results$ind.coord)
+coord <- as.matrix(dapc_result$ind.coord)
 
 if (ncol(coords) >=2) {
    dapc_df <- data.frame(
