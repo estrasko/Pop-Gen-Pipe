@@ -1,29 +1,35 @@
 #!/usr/bin/env Rscript
 
+#Import packages without printing package messages
 suppressPackageStartupMessages({
   library(diveRsity)
   library(qgraph)
   library(reshape2)
 })
 
+#Reads command line arguments from Pop_Script_2.py into R
 args <- commandArgs(trailingOnly = TRUE)
 
+#Check that all required files to run analyses are included in the run code
 if (!(length(args) %in% c(5, 6))) {
   stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv]")
 }
 
-input_file <- args[1]
-outdir <- args[2]
-stat <- args[3]
-boots <- as.integer(args[4])
-threads <- as.integer(args[5])
-node_names_arg <- if (length(args) == 6) args[6] else NA
+input_file <- args[1] #names multi_snp_genepop file as input
+outdir <- args[2] #outdir is the included path
+stat <- args[3] #String argument
+boots <- as.integer(args[4]) #Assign bootstrap value (integer)
+threads <- as.integer(args[5]) #number of threads defined in command
+node_names_arg <- if (length(args) == 6) args[6] else NA #Make sure number of arguments pass is 6, otherwise report NA
 
+#Create output directory for this script
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
+#Check point for threads to be a number greater than 1
 if (is.na(threads) || threads < 1) {
   stop("threads must be an integer >= 1")
 }
+
 
 cat("Running divMigrate...\n")
 cat(paste0("Statistic: ", stat, "\n"))
