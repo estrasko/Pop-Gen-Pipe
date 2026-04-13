@@ -41,7 +41,8 @@ graph TD;
    ```bash
    git clone https://github.com/estrasko/Pop-Gen-Pipe.git
    ```
-   > NOTE: You can also fork the repository and work that way.
+   > [!NOTE]
+   > You can also fork the repository and work that way.
 
 2. Move to the directory: 
    ```bash
@@ -66,7 +67,8 @@ graph TD;
 
 Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1</sup>.
 
-> NOTE: **All input files must have populations in the same order!** Critically, FST and geo matrices must have identical dimensions and identical population order.
+> [!IMPORTANT]
+> **All input files must have populations in the same order!** Critically, FST and geo matrices must have identical dimensions and identical population order.
 
 ### 1. Genepop files
 
