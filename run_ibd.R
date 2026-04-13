@@ -10,15 +10,16 @@ suppressPackageStartupMessages({
 args <- commandArgs(trailingOnly = TRUE)
 
 # Check number of arguments
-if (!(length(args) %in% c(3, 4))) {
-  stop("Usage: Rscript run_ibd.R <fst_csv> <distance_csv> <outdir> [summary_stats_csv]")
+if (!(length(args) %in% c(3, 4, 5))) {
+  stop("Usage: Rscript run_ibd.R <fst_csv> <distance_csv> <outdir> [summary_stats_csv] [pop_colors_csv]")
 }
 
 # Assign inputs
 fst_file <- args[1]
 distance_file <- args[2]
 outdir <- args[3]
-summary_stats_file <- if (length(args) == 4) args[4] else NA
+summary_stats_file <- if (length(args) >= 4) args[4] else NA
+pop_colors_file <- if (length(args) == 5) args[5] else NA
 
 # Create output directory if it doesn't exist
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
@@ -31,6 +32,37 @@ fst_mat <- as.matrix(fst_df)
 cat("Reading geographic distance matrix...\n")
 distance_df <- read.csv(distance_file, header = FALSE, check.names = FALSE)
 geo_mat <- as.matrix(distance_df)
+
+# If a population color file is provided, validate it and document current limitations.
+# The current fst.csv and geo.csv inputs are unlabeled matrices, so population-specific
+# colors cannot be mapped safely to pairwise points without explicit population names.
+if (!is.na(pop_colors_file)) {
+  cat("Reading population colors...\n")
+  color_df <- read.csv(pop_colors_file, stringsAsFactors = FALSE)
+
+  if (!all(c("Population", "Color") %in% names(color_df))) {
+    stop("Population colors CSV must contain columns named 'Population' and 'Color'.")
+  }
+
+  if (anyDuplicated(color_df$Population)) {
+    stop("Population colors CSV contains duplicate Population entries.")
+  }
+
+  write.csv(
+    color_df,
+    file = file.path(outdir, "ibd_population_colors.csv"),
+    row.names = FALSE
+  )
+
+  writeLines(
+    c(
+      "Population colors were validated successfully.",
+      "The current IBD plot was not recolored because fst.csv and geo.csv are unlabeled matrices.",
+      "To apply population colors to IBD pairwise plots, the matrices must include explicit population names or a separate population-order file."
+    ),
+    con = file.path(outdir, "ibd_color_info.txt")
+  )
+}
 
 #Checking to make sure there's enough populations to run IBD
 n_pop <- nrow(fst_mat)

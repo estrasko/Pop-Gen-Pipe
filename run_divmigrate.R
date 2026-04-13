@@ -8,8 +8,8 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (!(length(args) %in% c(5, 6))) {
-  stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv]")
+if (!(length(args) %in% c(5, 6, 7))) {
+  stop("Usage: Rscript run_divmigrate.R <multi_snp_genepop> <outdir> <stat> <boots> <threads> [node_names_csv] [pop_colors_csv]")
 }
 
 input_file <- args[1]
@@ -17,7 +17,8 @@ outdir <- args[2]
 stat <- args[3]
 boots <- as.integer(args[4])
 threads <- as.integer(args[5])
-node_names_arg <- if (length(args) == 6) args[6] else NA
+node_names_arg <- if (length(args) >= 6 && args[6] != "__NONE__") args[6] else NA
+pop_colors_file <- if (length(args) == 7) args[7] else NA
 
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
 
@@ -79,6 +80,31 @@ if (!is.na(node_names_arg)) {
   }
 }
 
+# If a population color file is provided, validate it and use the first color
+# as a single default node color for the whole divMigrate network.
+node_color <- "lightblue"
+
+if (!is.na(pop_colors_file)) {
+  cat("Reading population colors...\n")
+  color_df <- read.csv(pop_colors_file, stringsAsFactors = FALSE)
+
+  if (!all(c("Population", "Color") %in% names(color_df))) {
+    stop("Population colors CSV must contain columns named 'Population' and 'Color'.")
+  }
+
+  if (nrow(color_df) < 1) {
+    stop("Population colors CSV must contain at least one row.")
+  }
+
+  node_color <- color_df$Color[1]
+
+  write.csv(
+    color_df,
+    file = file.path(outdir, "divmigrate_population_colors.csv"),
+    row.names = FALSE
+  )
+}
+
 write.csv(
   round(gmat, 3),
   file = file.path(outdir, "divmigrate_relative_migration_matrix.csv"),
@@ -106,7 +132,10 @@ qgraph(
   gmat,
   labels = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
   edge.labels = TRUE,
-  curve = 0.8
+  curve = 0.8,
+  color = "white",
+  edge.color = node_color,        
+  label.color = "black"
 )
 dev.off()
 
@@ -121,7 +150,10 @@ qgraph(
   gmat,
   labels = if (!is.null(colnames(gmat))) colnames(gmat) else NULL,
   edge.labels = TRUE,
-  curve = 0.8
+  curve = 0.8,
+  color = "white",
+  edge.color = node_color,
+  label.color = "black"
 )
 dev.off()
 
