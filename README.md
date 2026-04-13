@@ -112,7 +112,7 @@ Files required for input in this pipeline are created by the *Populations* step 
    ```
    <br/>
 
-### 5. Custom population color matrix (optional)
+### 5. Custom population colors (pop_colors.csv) **optional**
 
 &emsp;CSV file with two columns:
 
