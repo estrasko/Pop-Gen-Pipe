@@ -182,12 +182,27 @@ capture.output(
 saveRDS(xval_obj, file = file.path(outdir, "dapc_xval_result.rds"))
 saveRDS(dapc_result, file = file.path(outdir, "dapc_result.rds"))
 
+#Added code accounts for one discriminat function axis
+coord <- as.matrix(dapc_results$ind.coord)
+
+if (ncol(coords) >=2) {
+   dapc_df <- data.frame(
+    LD1 = coords[,1],
+    LD2 = coords[,2]
+    )
+} else {
+   dapc_df <- data.frame(
+    LD1 = coords[,1]
+   )
+}
+
+#Old, did not accomidate for one axis plots
 # Build custom DAPC scatter plot
-dapc_plot_df <- data.frame(
-  LD1 = dapc_result$ind.coord[, 1],
-  LD2 = dapc_result$ind.coord[, 2],
-  Population = as.factor(pop(genind_obj))
-)
+#dapc_plot_df <- data.frame(
+  #LD1 = dapc_result$ind.coord[, 1],
+  #LD2 = dapc_result$ind.coord[, 2],
+  #Population = as.factor(pop(genind_obj))
+#)
 
 p <- ggplot(dapc_plot_df, aes(x = LD1, y = LD2, color = Population)) +
   geom_point(size = 3, alpha = 0.8) +
