@@ -112,6 +112,50 @@ Files required for input in this pipeline are created by the *Populations* step 
    ```
    <br/>
 
+## Analyses
+
+### 1. Analysis of Molecular Variance (AMOVA)
+
+&emsp;Partitions variaiton among and within populations  
+
+&emsp;Outputs:  
+&emsp;- permutation test plots  
+&emsp;- summary files  
+
+### 2. Discriminant Analysis of Principal Components (DAPC)
+
+&emsp;Identifies and describes clusters  
+
+&emsp;Outputs:  
+&emsp;- assignment plot  
+&emsp;- scatter plot  
+&emsp;- summary files  
+
+### 3. Isolation by Distance (IBD)
+
+&emsp;Tests for distance-limited gene flow
+
+&emsp;Outputs:  
+&emsp;- FST vs. distance plot  
+&emsp;- summary files  
+
+### 4. Migration Analysis (divmigrate)
+
+&emsp;Estimates directional gene flow
+
+&emsp;Options:  
+&emsp;`--divmigrate-stat gst`  
+&emsp;`--divmigrate-stat D`  
+&emsp;`--divmigrate-stat Nm`  
+
+&emsp;Outputs:  
+&emsp;- migration matrices  
+&emsp;- network plots  
+&emsp;- summary files  
+
+&emsp;divmigrate is part of the diveRsity package. [Learn more about divmigrate from the developers.](https://github.com/kkeenan02/diveRsity/tree/master)
+<br/><br/>
+
 ## Run the Pipeline
 
 ```bash
@@ -140,31 +184,6 @@ For example:
 ```bash
 --run-divmigrate --threads 12
 ```
-<br/>
-
-## Analyses
-
-### 1. Analysis of Molecular Variance (AMOVA)
-
-### 2. Discriminant Analysis of Principal Components (DAPC)
-
-### 3. Isolation by Distance (IBD)
-
-### 4. Migration Analysis (divmigrate)
-
-&emsp;Estimates directional gene flow
-
-&emsp;Options:  
-&emsp;`--divmigrate-stat gst`  
-&emsp;`--divmigrate-stat D`  
-&emsp;`--divmigrate-stat Nm`  
-
-&emsp;Outputs:  
-&emsp;- migration matrices  
-&emsp;- network plots  
-&emsp;- summary files  
-
-&emsp;divmigrate is part of the diveRsity package. [Learn more about divmigrate from the developers.](https://github.com/kkeenan02/diveRsity/tree/master)
 <br/>
 
 ## References
