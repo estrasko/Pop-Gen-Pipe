@@ -10,7 +10,6 @@ In this project, we built a Python pipeline that connects commonly used populati
 3. Collaborate using git to create the pipeline
 4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects  
 <br/>
-
 **End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
 
 ## Overview
@@ -87,8 +86,7 @@ and identical population order.
    LT-pop_02,Buxahatchee
    ...
    ```
-
-&emsp;*Sample* is the name of the individual and *Population* is the population of origin.<br/>
+&emsp;*Sample* is the name of the individual and *Population* is the population of origin.<br/><br/>
 
 ### 3. FST (Fixation index) matrix (fst.csv)
 
@@ -100,7 +98,6 @@ and identical population order.
    0.23,0.19,0,0.13
    0.18,0.13,0.13,0
    ```
-<br/>
 
 ### 4. Geographic distance matrix (geo.csv)
 
@@ -131,7 +128,7 @@ python Pop_script_2.py \
   --run-divmigrate
   ```
 
-**Any of the above analyses after** `--scripts-dir` **can be removed or run individually**<br/><br/>
+**Any of the above analyses after** `--scripts-dir` **can be removed or run individually.**<br/><br/>
 
 ## Optional: Multithreading for divmigrate
 
@@ -154,14 +151,14 @@ Example: `--run-divmigrate --threads 12`<br/><br/>
 &emsp;Estimates directional gene flow
 
 &emsp;Options:  
-&emsp;`--divmigrate-stat gst`
-&emsp;`--divmigrate-stat D`
-&emsp;`--divmigrate-stat Nm`
+&emsp;`--divmigrate-stat gst`  
+&emsp;`--divmigrate-stat D`  
+&emsp;`--divmigrate-stat Nm`  
 
 &emsp;Outputs:
-   - migration matrices
-   - network plots
-   - summary files
+&emsp;- migration matrices
+&emsp;- network plots
+&emsp;- summary files
 
 &emsp;divmigrate is part of the diveRsity package. Learn more about divmigrate from the developers: https://github.com/kkeenan02/diveRsity/tree/master<br/><br/>
 
