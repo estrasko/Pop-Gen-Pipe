@@ -72,10 +72,10 @@ Files required for input in this pipeline are created by the *Populations* step 
 
 ### 1. Genepop files
 
-   | File           | Purpose           |
-   | -------------- | ----------------- |
-   | `haps.genepop` | AMOVA             |
-   | `snps.genepop` | DAPC + divMigrate |
+   | File           | Purpose               |
+   | -------------- | --------------------- |
+   | `haps.genepop` | AMOVA                 |
+   | `snps.genepop` | DAPC, divMigrate, IBD |
 
 ### 2. Popmap (popmap.csv)
 
@@ -111,6 +111,20 @@ Files required for input in this pipeline are created by the *Populations* step 
    80.14,90.25,57.79,0
    ```
    <br/>
+
+### 5. Custom population color matrix (optional)
+
+&emsp;CSV file with two columns:
+
+   ```csv
+   Population,Color
+   Buxahatchee,cornflowerblue
+   Ohatchee,lightsteelblue2
+   Choccolocco,indianred2
+   Coosa,lightgoldenrod3
+   ```
+&emsp;*Population* is the name of the origin and *Color* is an R-friendly color, whether that be the R name (e.g., cornflowerblue) or the color code (e.g., #6495ED).<br/>
+In DAPC, this color codes each populations with its own unique color. In divmigrate, the first color from you color file will be used to create the directional migration arrows. IBD and AMOVA are not affected by color.
 
 ## Analyses
 
