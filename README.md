@@ -8,8 +8,8 @@ In this project, we built a Python pipeline that connects commonly used populati
 1. Create a reproducible population genomics analysis workflow
 2. Use a Conda environment for transferable reproducibility
 3. Collaborate using git to create the pipeline
-4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects  
-<br/>
+4. Test the pipeline using ~3 population genomic datasets to confirm use across taxa/projects<br/>
+
 **End Goal: Produce quality population genomic figures and analyses results reproducable for publication.**<br/><br/>
 
 ## Overview
@@ -41,7 +41,7 @@ graph TD;
    ```bash
    git clone https://github.com/estrasko/Pop-Gen-Pipe.git
    ```
-   NOTE: You can also fork the repository and work that way.
+   > NOTE: You can also fork the repository and work that way.
 
 2. Move to the directory: 
    ```bash
@@ -66,8 +66,7 @@ graph TD;
 
 Files required for input in this pipeline are created by the *Populations* step in STACKS<sup>1</sup>.
 
-*NOTE: ALL INPUT FILES MUST BE IN THE SAME ORDER (by population)!* Critically, FST and geo matrices must have identical dimensions
-and identical population order.
+> *NOTE: ALL INPUT FILES MUST HAVE POPULATIONS IN THE SAME ORDER!* Critically, FST and geo matrices must have identical dimensions and identical population order.
 
 ### 1. Genepop files
 
@@ -86,7 +85,7 @@ and identical population order.
    LT-pop_02,Buxahatchee
    ...
    ```
-&emsp;*Sample* is the name of the individual and *Population* is the population of origin.<br/><br/>
+&emsp;*Sample* is the name of the individual and *Population* is the population of origin.<br/>
 
 ### 3. FST (Fixation index) matrix (fst.csv)
 
