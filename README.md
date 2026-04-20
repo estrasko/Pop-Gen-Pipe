@@ -151,7 +151,8 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 &emsp;- assignment plot  
 
-<img width="50%" alt="dapc_assignplot" src="https://github.com/user-attachments/assets/64c073e7-e559-4751-981d-7d1d333c2621" />
+<img width="50%" alt="dapc_scatter" src="https://github.com/user-attachments/assets/7883d913-dd89-4073-9828-c4e061cb0a96" />
+
 
 &emsp;- scatter plot 
 
