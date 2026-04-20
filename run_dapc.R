@@ -190,7 +190,7 @@ dapc_plot_df <- data.frame(
 )
 
 p <- ggplot(dapc_plot_df, aes(x = LD1, y = LD2, color = Population)) +
-  geom_point(size = 3, alpha = 0.8) +
+  geom_point(size = 6, alpha = 0.8) +
   theme_bw() +
   labs(
     x = "Discriminant Function 1",
