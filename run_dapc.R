@@ -8,7 +8,7 @@ suppressPackageStartupMessages({
 # Capture the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-if (!(length(args) %in% c(3,4))) {
+if (!(length(args) %in% c(3, 4))) {
   stop("Usage: Rscript run_dapc.R <multi_snp_genepop> <popmap_file> <outdir> [pop_colors_csv]")
 }
 
@@ -35,7 +35,7 @@ if (!("Population" %in% names(popmap_df))) {
   stop("Popmap file must contain a column named 'Population'.")
 }
 
-# Extract individual sample names from the genind object 
+# Extract individual sample names from the genind object
 genepop_samples <- indNames(genind_obj)
 
 # Check that sample names in the popmap file match the names from the genind object
@@ -182,61 +182,8 @@ capture.output(
 saveRDS(xval_obj, file = file.path(outdir, "dapc_xval_result.rds"))
 saveRDS(dapc_result, file = file.path(outdir, "dapc_result.rds"))
 
-#Added code accounts for one discriminat function axis
+# Added code accounts for one discriminant function axis
 coords <- as.matrix(dapc_result$ind.coord)
-
-p <- ggplot(dapc_plot_df, aes(x = LD1, y = LD2, color = Population)) +
-  geom_point(size = 6, alpha = 0.8) +
-  theme_bw() +
-  labs(
-    x = "Discriminant Function 1",
-    y = "Discriminant Function 2",
-    title = "DAPC Scatter Plot"
-  )
-
-if (!is.null(custom_colors)) {
-  p <- p + scale_color_manual(values = custom_colors)
-=======
-if (ncol(coords) >=2) {
-   dapc_df <- data.frame(
-    LD1 = coords[,1],
-    LD2 = coords[,2]
-    )
-} else {
-   dapc_df <- data.frame(
-    LD1 = coords[,1]
-   )
-}
-
-#Old, did not accomidate for one axis plots
-# Build custom DAPC scatter plot
-#dapc_plot_df <- data.frame(
-  #LD1 = dapc_result$ind.coord[, 1],
-  #LD2 = dapc_result$ind.coord[, 2],
-  #Population = as.factor(pop(genind_obj))
-#)
-
-#p <- ggplot(dapc_plot_df, aes(x = LD1, y = LD2, color = Population)) +
- # geom_point(size = 3, alpha = 0.8) +
-  #theme_bw() +
-  #labs(
-   # x = "Discriminant Function 1",
-    #y = "Discriminant Function 2",
-    #title = "DAPC Scatter Plot"
-  #)
-
-#if (!is.null(custom_colors)) {
-  #p <- p + scale_color_manual(values = custom_colors)
-#}
-
-#ggsave(
-  #filename = file.path(outdir, "dapc_scatter.png"),
-  #plot = p,
-  #width = 8,
-  #height = 6,
-  #dpi = 300
-#)
-
 eig <- dapc_result$eig
 percent_var <- eig / sum(eig) * 100
 
@@ -259,7 +206,7 @@ if (best_n_da == 1 || ncol(coords) == 1) {
   )
 
   plot(
-    density(coords[,1]),
+    density(coords[, 1]),
     main = xlab_text,
     xlab = "DAPC score",
     ylab = "Density",
@@ -268,7 +215,7 @@ if (best_n_da == 1 || ncol(coords) == 1) {
 
   dev.off()
 
-# Plotting for 2 axis
+# Plotting for 2 axes
 } else {
 
   cat("Generating 2-axis scatter plot...\n")
@@ -285,25 +232,32 @@ if (best_n_da == 1 || ncol(coords) == 1) {
     "%)"
   )
 
-  png(
+  dapc_plot_df <- data.frame(
+    LD1 = coords[, 1],
+    LD2 = coords[, 2],
+    Population = as.factor(pop(genind_obj))
+  )
+
+  p <- ggplot(dapc_plot_df, aes(x = LD1, y = LD2, color = Population)) +
+    geom_point(size = 6, alpha = 0.8) +
+    theme_bw() +
+    labs(
+      x = xlab_text,
+      y = ylab_text,
+      title = "DAPC Scatter Plot"
+    )
+
+  if (!is.null(custom_colors)) {
+    p <- p + scale_color_manual(values = custom_colors)
+  }
+
+  ggsave(
     filename = file.path(outdir, "dapc_scatter.png"),
-    width = 2200,
-    height = 1800,
-    res = 300
+    plot = p,
+    width = 8,
+    height = 6,
+    dpi = 300
   )
-
-  scatter(
-    dapc_result,
-    scree.da = TRUE,
-    posi.da = "bottomleft",
-    cell = 0,
-    cstar = 0,
-    clab = 0,
-    xlab = xlab_text,
-    ylab = ylab_text
-  )
-
-  dev.off()
 }
 
 png(
