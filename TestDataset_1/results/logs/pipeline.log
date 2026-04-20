@@ -1,0 +1,16 @@
+2026-04-20 12:54:56,869 - INFO - Starting population genetics pipeline.
+2026-04-20 12:54:56,869 - INFO - Output directory: TestDataset_1/results
+2026-04-20 12:54:56,870 - INFO - Validating popmap against multi-SNP genepop file: TestDataset_1/populations.snps.genepop
+2026-04-20 12:54:56,899 - INFO - Wrote corrected popmap to: TestDataset_1/results/popmap_corrected.csv
+2026-04-20 12:54:56,899 - INFO - Validating popmap against haplotype genepop file: TestDataset_1/populations.haps.genepop
+2026-04-20 12:54:56,910 - INFO - Wrote corrected popmap to: TestDataset_1/results/popmap_corrected.csv
+2026-04-20 12:54:56,910 - INFO - Running AMOVA...
+2026-04-20 12:54:56,910 - INFO - Running command: Rscript run_amova.R TestDataset_1/populations.haps.genepop TestDataset_1/results/popmap_corrected.csv TestDataset_1/results/amova
+2026-04-20 12:55:36,265 - INFO - Running DAPC...
+2026-04-20 12:55:36,266 - INFO - Running command: Rscript run_dapc.R TestDataset_1/populations.snps.genepop TestDataset_1/results/popmap_corrected.csv TestDataset_1/results/dapc
+2026-04-20 12:56:59,326 - INFO - Running IBD...
+2026-04-20 12:56:59,326 - INFO - Running command: Rscript run_ibd.R TestDataset_1/fst.csv TestDataset_1/geo.csv TestDataset_1/results/ibd
+2026-04-20 12:57:01,304 - INFO - Running divMigrate...
+2026-04-20 12:57:01,304 - INFO - Using 5 thread(s) for divMigrate.
+2026-04-20 12:57:01,304 - INFO - Running command: Rscript run_divmigrate.R TestDataset_1/populations.snps.genepop TestDataset_1/results/divmigrate gst 1000 5
+2026-04-20 13:03:38,209 - INFO - Pipeline completed successfully.

@@ -1,0 +1,13 @@
+class: krandtest lightkrandtest 
+Monte-Carlo tests
+Call: randtest.amova(xtest = amova_result, nrepet = 999)
+
+Number of tests:   3 
+
+Adjustment method for multiple comparisons:   none 
+Permutation number:   999 
+                           Test       Obs   Std.Obs   Alter Pvalue
+1     Variations within samples  938.6396 -9.054503    less  0.001
+2    Variations between samples -133.2133 -5.275150 greater  1.000
+3 Variations between Population  787.4622 41.960801 greater  0.001
+
