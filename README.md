@@ -145,6 +145,7 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 &emsp;Outputs:  
 &emsp;- summary files
+
 &emsp;- assignment plot  
 <img width="50%" alt="dapc_assignplot" src="https://github.com/user-attachments/assets/64c073e7-e559-4751-981d-7d1d333c2621" />
 
@@ -158,6 +159,7 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 &emsp;Outputs:  
 &emsp;- summary files  
+
 &emsp;- FST vs. distance plot 
 <img width="50%" alt="fst_vs_distance" src="https://github.com/user-attachments/assets/7b1d4f08-4d68-4bfa-a50b-8016e0883344" />
 
@@ -174,7 +176,6 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 &emsp;Outputs:  
 &emsp;- summary files  
 &emsp;- migration matrices  
-
 &emsp;- network plots  
 <img width="50%" alt="divmigrate_network" src="https://github.com/user-attachments/assets/53944cf3-ded7-440a-b724-b50d300be711" />
 
