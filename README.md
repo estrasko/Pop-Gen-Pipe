@@ -134,6 +134,9 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 &emsp;Outputs:    
 &emsp;- summary statistics file  
+<img width="50%" alt="Screenshot 2026-04-20 134521" src="https://github.com/user-attachments/assets/3a64ca6d-6324-44d6-be58-3ffecedf9da2" />
+
+
 &emsp;- permutation test plot 
 
 <img width="50%" alt="amova_randtest_plot" src="https://github.com/user-attachments/assets/af89f71c-bd07-4160-83b7-f1ee126ad662" />
