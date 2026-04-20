@@ -1,0 +1,38 @@
+2026-04-12 21:58:39,241 - INFO - Starting population genetics pipeline.
+2026-04-12 21:58:39,241 - INFO - Output directory: snail_input_files/results_snail_dapc_test_colors
+2026-04-12 21:58:39,241 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 21:58:39,255 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv
+2026-04-12 21:58:39,255 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 21:58:39,259 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv
+2026-04-12 21:58:39,259 - INFO - Running DAPC...
+2026-04-12 21:58:39,259 - INFO - Running command: Rscript run_dapc.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv snail_input_files/results_snail_dapc_test_colors/dapc
+2026-04-12 21:58:40,796 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 341, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 160, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [str(multi_snp_genepop), str(popmap), str(outdir)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop', 'snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv', 'snail_input_files/results_snail_dapc_test_colors/dapc']' returned non-zero exit status 1.
+2026-04-12 22:07:30,769 - INFO - Starting population genetics pipeline.
+2026-04-12 22:07:30,769 - INFO - Output directory: snail_input_files/results_snail_dapc_test_colors
+2026-04-12 22:07:30,769 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 22:07:30,781 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv
+2026-04-12 22:07:30,781 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 22:07:30,785 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv
+2026-04-12 22:07:30,785 - INFO - Running DAPC...
+2026-04-12 22:07:30,785 - INFO - Running command: Rscript run_dapc.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_dapc_test_colors/popmap_corrected.csv snail_input_files/results_snail_dapc_test_colors/dapc snail_input_files/pop_colors.csv
+2026-04-12 22:08:19,408 - INFO - Pipeline completed successfully.

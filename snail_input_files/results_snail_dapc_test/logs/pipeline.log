@@ -39,3 +39,12 @@ subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'populations.s
 2026-04-11 12:37:04,623 - INFO - Running DAPC...
 2026-04-11 12:37:04,623 - INFO - Running command: Rscript run_dapc.R populations.snps_multiple_SNP_per_locus_R80.genepop results_snail_dapc_test/popmap_corrected.csv results_snail_dapc_test/dapc
 2026-04-11 12:37:54,252 - INFO - Pipeline completed successfully.
+2026-04-12 21:28:52,704 - INFO - Starting population genetics pipeline.
+2026-04-12 21:28:52,704 - INFO - Output directory: snail_input_files/results_snail_dapc_test
+2026-04-12 21:28:52,704 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 21:28:52,721 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test/popmap_corrected.csv
+2026-04-12 21:28:52,721 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 21:28:52,727 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test/popmap_corrected.csv
+2026-04-12 21:28:52,727 - INFO - Running DAPC...
+2026-04-12 21:28:52,727 - INFO - Running command: Rscript run_dapc.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_dapc_test/popmap_corrected.csv snail_input_files/results_snail_dapc_test/dapc
+2026-04-12 21:29:40,878 - INFO - Pipeline completed successfully.

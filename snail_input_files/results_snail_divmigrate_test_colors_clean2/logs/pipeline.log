@@ -1,0 +1,70 @@
+2026-04-12 23:12:05,559 - INFO - Starting population genetics pipeline.
+2026-04-12 23:12:05,559 - INFO - Output directory: snail_input_files/results_snail_divmigrate_test_colors_clean2
+2026-04-12 23:12:05,560 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 23:12:05,581 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:12:05,581 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 23:12:05,589 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:12:05,589 - INFO - Running divMigrate...
+2026-04-12 23:12:05,589 - INFO - Using 1 thread(s) for divMigrate.
+2026-04-12 23:12:05,590 - INFO - Running command: Rscript run_divmigrate.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_divmigrate_test_colors_clean2/divmigrate gst 1000 1 __NONE__ snail_input_files/pop_colors.csv
+2026-04-12 23:12:33,467 - INFO - Starting population genetics pipeline.
+2026-04-12 23:12:33,467 - INFO - Output directory: snail_input_files/results_snail_divmigrate_test_colors_clean2
+2026-04-12 23:12:33,467 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 23:12:33,474 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:12:33,474 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 23:12:33,477 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:12:33,477 - INFO - Running divMigrate...
+2026-04-12 23:12:33,477 - INFO - Using 1 thread(s) for divMigrate.
+2026-04-12 23:12:33,477 - INFO - Running command: Rscript run_divmigrate.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_divmigrate_test_colors_clean2/divmigrate gst 1000 1 __NONE__ snail_input_files/pop_colors.csv
+2026-04-12 23:13:06,432 - INFO - Starting population genetics pipeline.
+2026-04-12 23:13:06,432 - INFO - Output directory: snail_input_files/results_snail_divmigrate_test_colors_clean2
+2026-04-12 23:13:06,432 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 23:13:06,436 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:13:06,437 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 23:13:06,440 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:13:06,440 - INFO - Running divMigrate...
+2026-04-12 23:13:06,440 - INFO - Using 14 thread(s) for divMigrate.
+2026-04-12 23:13:06,440 - INFO - Running command: Rscript run_divmigrate.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_divmigrate_test_colors_clean2/divmigrate gst 1000 14 __NONE__ snail_input_files/pop_colors.csv
+2026-04-12 23:14:51,439 - INFO - Pipeline completed successfully.
+2026-04-12 23:18:44,167 - INFO - Starting population genetics pipeline.
+2026-04-12 23:18:44,167 - INFO - Output directory: snail_input_files/results_snail_divmigrate_test_colors_clean2
+2026-04-12 23:18:44,167 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 23:18:44,172 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:18:44,172 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 23:18:44,175 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:18:44,175 - INFO - Running divMigrate...
+2026-04-12 23:18:44,175 - INFO - Using 12 thread(s) for divMigrate.
+2026-04-12 23:18:44,175 - INFO - Running command: Rscript run_divmigrate.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_divmigrate_test_colors_clean2/divmigrate gst 1000 12 __NONE__ snail_input_files/pop_colors.csv
+2026-04-12 23:20:24,721 - INFO - Pipeline completed successfully.
+2026-04-12 23:22:06,006 - INFO - Starting population genetics pipeline.
+2026-04-12 23:22:06,006 - INFO - Output directory: snail_input_files/results_snail_divmigrate_test_colors_clean2
+2026-04-12 23:22:06,006 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 23:22:06,011 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:22:06,012 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 23:22:06,015 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:22:06,015 - INFO - Running IBD...
+2026-04-12 23:22:06,015 - INFO - Running command: Rscript run_ibd.R snail_input_files/fst.csv snail_input_files/geo.csv snail_input_files/results_snail_divmigrate_test_colors_clean2/ibd snail_input_files/pop_colors.csv
+2026-04-12 23:22:05,835 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 368, in main
+    run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv, pop_colors_csv)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 193, in run_ibd
+    run_r_script(scripts_dir / "run_ibd.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_ibd.R', 'snail_input_files/fst.csv', 'snail_input_files/geo.csv', 'snail_input_files/results_snail_divmigrate_test_colors_clean2/ibd', 'snail_input_files/pop_colors.csv']' returned non-zero exit status 1.
+2026-04-12 23:25:58,397 - INFO - Starting population genetics pipeline.
+2026-04-12 23:25:58,398 - INFO - Output directory: snail_input_files/results_snail_divmigrate_test_colors_clean2
+2026-04-12 23:25:58,398 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 23:25:58,402 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:25:58,402 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 23:25:58,405 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_divmigrate_test_colors_clean2/popmap_corrected.csv
+2026-04-12 23:25:58,405 - INFO - Running IBD...
+2026-04-12 23:25:58,405 - INFO - Running command: Rscript run_ibd.R snail_input_files/fst.csv snail_input_files/geo.csv snail_input_files/results_snail_divmigrate_test_colors_clean2/ibd
+2026-04-12 23:25:59,446 - INFO - Pipeline completed successfully.

@@ -1,0 +1,29 @@
+2026-04-12 22:31:01,045 - INFO - Starting population genetics pipeline.
+2026-04-12 22:31:01,045 - INFO - Output directory: snail_input_files/results_snail_dapc_test_colors_5
+2026-04-12 22:31:01,045 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 22:31:01,049 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors_5/popmap_corrected.csv
+2026-04-12 22:31:01,049 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 22:31:01,052 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors_5/popmap_corrected.csv
+2026-04-12 22:31:01,052 - INFO - Running DAPC...
+2026-04-12 22:31:01,052 - INFO - Running command: Rscript run_dapc.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_dapc_test_colors_5/popmap_corrected.csv snail_input_files/results_snail_dapc_test_colors_5/dapc snail_input_files/pop_colors.csv
+2026-04-12 22:31:50,477 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 345, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 164, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args,
+        ^^^^^
+    )
+    ^
+  File "/home/estrasko/scripting/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/estrasko/miniforge3/envs/Pop-Gen-Pipe/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop', 'snail_input_files/results_snail_dapc_test_colors_5/popmap_corrected.csv', 'snail_input_files/results_snail_dapc_test_colors_5/dapc', 'snail_input_files/pop_colors.csv']' returned non-zero exit status 1.

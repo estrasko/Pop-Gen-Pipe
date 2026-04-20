@@ -1,0 +1,2 @@
+Population colors were validated successfully.
+The AMOVA randtest plot is not population-specific, so colors were documented but not applied to the plot.

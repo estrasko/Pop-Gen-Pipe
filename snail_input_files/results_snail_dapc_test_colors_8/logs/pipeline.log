@@ -1,0 +1,9 @@
+2026-04-12 22:42:02,067 - INFO - Starting population genetics pipeline.
+2026-04-12 22:42:02,067 - INFO - Output directory: snail_input_files/results_snail_dapc_test_colors_8
+2026-04-12 22:42:02,067 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 22:42:02,072 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors_8/popmap_corrected.csv
+2026-04-12 22:42:02,072 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 22:42:02,074 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_dapc_test_colors_8/popmap_corrected.csv
+2026-04-12 22:42:02,074 - INFO - Running DAPC...
+2026-04-12 22:42:02,074 - INFO - Running command: Rscript run_dapc.R snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop snail_input_files/results_snail_dapc_test_colors_8/popmap_corrected.csv snail_input_files/results_snail_dapc_test_colors_8/dapc snail_input_files/pop_colors.csv
+2026-04-12 22:42:52,251 - INFO - Pipeline completed successfully.

@@ -1,0 +1,37 @@
+$selected_n_pca
+[1] 5
+
+$selected_n_da
+[1] 2
+
+$dapc_summary
+	#################################################
+	# Discriminant Analysis of Principal Components #
+	#################################################
+class: dapc
+$call: dapc.genind(x = genind_obj, n.pca = best_n_pca, n.da = best_n_da)
+
+$n.pca: 5 first PCs of PCA used
+$n.da: 2 discriminant functions saved
+$var (proportion of conserved variance): 0.627
+
+$eig (eigenvalues): 6602 3264 1847  vector    length content                   
+1 $eig      3      eigenvalues               
+2 $grp      71     prior group assignment    
+3 $prior    4      prior group probabilities 
+4 $assign   71     posterior group assignment
+5 $pca.cent 15752  centring vector of PCA    
+6 $pca.norm 15752  scaling vector of PCA     
+7 $pca.eig  70     eigenvalues of PCA        
+
+  data.frame    nrow  ncol content                                          
+1 $tab          71    5    retained PCs of PCA                              
+2 $means        4     5    group means                                      
+3 $loadings     5     2    loadings of variables                            
+4 $ind.coord    71    2    coordinates of individuals (principal components)
+5 $grp.coord    4     2    coordinates of groups                            
+6 $posterior    71    4    posterior membership probabilities               
+7 $pca.loadings 15752 5    PCA loadings of original variables               
+8 $var.contr    15752 2    contribution of original variables               
+
+

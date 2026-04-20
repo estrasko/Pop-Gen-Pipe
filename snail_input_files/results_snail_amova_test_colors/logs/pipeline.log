@@ -1,0 +1,9 @@
+2026-04-12 22:57:20,319 - INFO - Starting population genetics pipeline.
+2026-04-12 22:57:20,319 - INFO - Output directory: snail_input_files/results_snail_amova_test_colors
+2026-04-12 22:57:20,320 - INFO - Validating popmap against multi-SNP genepop file: snail_input_files/populations.snps_multiple_SNP_per_locus_R80.genepop
+2026-04-12 22:57:20,344 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_amova_test_colors/popmap_corrected.csv
+2026-04-12 22:57:20,344 - INFO - Validating popmap against haplotype genepop file: snail_input_files/populations.haps.genepop
+2026-04-12 22:57:20,353 - INFO - Wrote corrected popmap to: snail_input_files/results_snail_amova_test_colors/popmap_corrected.csv
+2026-04-12 22:57:20,354 - INFO - Running AMOVA...
+2026-04-12 22:57:20,354 - INFO - Running command: Rscript run_amova.R snail_input_files/populations.haps.genepop snail_input_files/results_snail_amova_test_colors/popmap_corrected.csv snail_input_files/results_snail_amova_test_colors/amova snail_input_files/pop_colors.csv
+2026-04-12 22:57:41,525 - INFO - Pipeline completed successfully.
