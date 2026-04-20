@@ -136,6 +136,8 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 &emsp;- permutation test plot  
 &emsp;- summary statistics file  
 
+<img width="2200" height="1800" alt="amova_randtest_plot" src="https://github.com/user-attachments/assets/af89f71c-bd07-4160-83b7-f1ee126ad662" />
+
 ### 2. Discriminant Analysis of Principal Components (DAPC)
 
 &emsp;Creates clusters of individuals sharing similar genetic data. Data is transformed using a Principal Component Analysis (PCA) and subsequently clustered using discriminant analysis (DA). This is a multivariate method requiring no a-priori knowledge.
