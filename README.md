@@ -132,9 +132,9 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 &emsp;Partitions variation within samples (individuals), between individuals within the population, and between populations  
 
-&emsp;Outputs:  
-&emsp;- permutation test plot  
+&emsp;Outputs:    
 &emsp;- summary statistics file  
+&emsp;- permutation test plot 
 
 <img width="50%" alt="amova_randtest_plot" src="https://github.com/user-attachments/assets/af89f71c-bd07-4160-83b7-f1ee126ad662" />
 
@@ -144,17 +144,22 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 [Learn more about DAPC.](https://grunwaldlab.github.io/Population_Genetics_in_R/DAPC.html#:~:text=Discriminant%20analysis%20of%20principal%20components%20(DAPC))  
 
 &emsp;Outputs:  
+&emsp;- summary files
 &emsp;- assignment plot  
+<img width="50%" alt="dapc_assignplot" src="https://github.com/user-attachments/assets/64c073e7-e559-4751-981d-7d1d333c2621" />
+
 &emsp;- scatter plot  
-&emsp;- summary files  
+<img width="50%" alt="dapc_scatter" src="https://github.com/user-attachments/assets/10e66e62-428f-415b-b98a-95675830d274" />
 
 ### 3. Isolation by Distance (IBD)
 
 &emsp;Tests for distance-limited gene flow
 
 &emsp;Outputs:  
-&emsp;- FST vs. distance plot  
 &emsp;- summary files  
+&emsp;- FST vs. distance plot 
+<img width="50%" alt="fst_vs_distance" src="https://github.com/user-attachments/assets/7b1d4f08-4d68-4bfa-a50b-8016e0883344" />
+
 
 ### 4. Migration Analysis (divmigrate)
 
@@ -166,9 +171,10 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 &emsp;`--divmigrate-stat Nm`  
 
 &emsp;Outputs:  
+&emsp;- summary files  
 &emsp;- migration matrices  
 &emsp;- network plots  
-&emsp;- summary files  
+<img width="50%" alt="divmigrate_network" src="https://github.com/user-attachments/assets/53944cf3-ded7-440a-b724-b50d300be711" />
 
 &emsp;divmigrate is part of the diveRsity package. [Learn more about divmigrate from the developers.](https://github.com/kkeenan02/diveRsity/tree/master)
 <br/><br/>
