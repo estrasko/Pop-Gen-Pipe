@@ -1,0 +1,236 @@
+2026-04-12 12:51:10,345 - INFO - Starting population genetics pipeline.
+2026-04-12 12:51:10,345 - INFO - Output directory: mussel_input_files/results
+2026-04-12 12:51:10,345 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 12:51:10,352 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 12:51:10,352 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-12 12:51:10,356 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 12:51:10,356 - INFO - Running AMOVA...
+2026-04-12 12:51:10,356 - INFO - Running command: Rscript run_amova.R mussel_input_files/populations.haps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/amova
+2026-04-12 12:51:27,226 - INFO - Running DAPC...
+2026-04-12 12:51:27,226 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-12 12:52:36,352 - INFO - Running IBD...
+2026-04-12 12:52:36,352 - INFO - Running command: Rscript run_ibd.R mussel_input_files/fst.csv mussel_input_files/geo.csv mussel_input_files/results/ibd
+2026-04-12 12:52:38,134 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 337, in main
+    run_ibd(fst_csv, geo_csv, dirs["ibd"], scripts_dir, summary_stats_csv)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 177, in run_ibd
+    run_r_script(scripts_dir / "run_ibd.R", args)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_ibd.R', 'mussel_input_files/fst.csv', 'mussel_input_files/geo.csv', 'mussel_input_files/results/ibd']' returned non-zero exit status 1.
+2026-04-12 13:14:26,458 - INFO - Starting population genetics pipeline.
+2026-04-12 13:14:26,459 - INFO - Output directory: mussel_input_files/results
+2026-04-12 13:14:26,459 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 13:14:26,501 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 13:14:26,502 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-12 13:14:26,511 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 13:14:26,511 - INFO - Running IBD...
+2026-04-12 13:14:26,511 - INFO - Running command: Rscript run_ibd.R mussel_input_files/fst.csv mussel_input_files/geo.csv mussel_input_files/results/ibd
+2026-04-12 13:14:29,726 - INFO - Running divMigrate...
+2026-04-12 13:14:29,726 - INFO - Using 3 thread(s) for divMigrate.
+2026-04-12 13:14:29,727 - INFO - Running command: Rscript run_divmigrate.R mussel_input_files/populations.snps.genepop mussel_input_files/results/divmigrate gst 1000 3
+2026-04-12 13:21:16,224 - INFO - Pipeline completed successfully.
+2026-04-12 16:23:23,514 - INFO - Starting population genetics pipeline.
+2026-04-12 16:23:23,514 - INFO - Output directory: mussel_input_files/results
+2026-04-12 16:23:23,515 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 16:23:23,541 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 16:23:23,541 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-12 16:23:23,547 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 16:23:23,547 - INFO - Running DAPC...
+2026-04-12 16:23:23,548 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-12 16:24:45,038 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 333, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 160, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [str(multi_snp_genepop), str(popmap), str(outdir)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'mussel_input_files/populations.snps.genepop', 'mussel_input_files/results/popmap_corrected.csv', 'mussel_input_files/results/dapc']' returned non-zero exit status 1.
+2026-04-12 16:28:08,532 - INFO - Starting population genetics pipeline.
+2026-04-12 16:28:08,532 - INFO - Output directory: mussel_input_files/results
+2026-04-12 16:28:08,534 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 16:28:08,542 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 16:28:08,543 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-12 16:28:08,547 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 16:28:08,547 - INFO - Running DAPC...
+2026-04-12 16:28:08,547 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-12 16:29:21,214 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 333, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 160, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [str(multi_snp_genepop), str(popmap), str(outdir)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'mussel_input_files/populations.snps.genepop', 'mussel_input_files/results/popmap_corrected.csv', 'mussel_input_files/results/dapc']' returned non-zero exit status 1.
+2026-04-12 16:35:49,668 - INFO - Starting population genetics pipeline.
+2026-04-12 16:35:49,668 - INFO - Output directory: mussel_input_files/results
+2026-04-12 16:35:49,668 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-12 16:35:49,675 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 16:35:49,675 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-12 16:35:49,679 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-12 16:35:49,679 - INFO - Running DAPC...
+2026-04-12 16:35:49,679 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-12 16:37:00,548 - INFO - Pipeline completed successfully.
+2026-04-13 09:53:32,740 - INFO - Starting population genetics pipeline.
+2026-04-13 09:53:32,741 - INFO - Output directory: mussel_input_files/results
+2026-04-13 09:53:32,742 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-13 09:53:32,779 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 09:53:32,779 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-13 09:53:32,786 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 09:53:32,786 - INFO - Running DAPC...
+2026-04-13 09:53:32,786 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-13 09:54:49,693 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 362, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 173, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args,
+        ^^^^^
+    )
+    ^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'mussel_input_files/populations.snps.genepop', 'mussel_input_files/results/popmap_corrected.csv', 'mussel_input_files/results/dapc']' returned non-zero exit status 1.
+2026-04-13 10:00:31,486 - INFO - Starting population genetics pipeline.
+2026-04-13 10:00:31,487 - INFO - Output directory: mussel_input_files/results
+2026-04-13 10:00:31,487 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-13 10:00:31,500 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:00:31,500 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-13 10:00:31,512 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:00:31,512 - INFO - Running DAPC...
+2026-04-13 10:00:31,513 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-13 10:01:45,807 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 362, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 173, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args,
+        ^^^^^
+    )
+    ^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'mussel_input_files/populations.snps.genepop', 'mussel_input_files/results/popmap_corrected.csv', 'mussel_input_files/results/dapc']' returned non-zero exit status 1.
+2026-04-13 10:03:13,004 - INFO - Starting population genetics pipeline.
+2026-04-13 10:03:13,004 - INFO - Output directory: mussel_input_files/results
+2026-04-13 10:03:13,004 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-13 10:03:13,018 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:03:13,018 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-13 10:03:13,025 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:03:13,025 - INFO - Running DAPC...
+2026-04-13 10:03:13,026 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-13 10:04:32,760 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 362, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 173, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args,
+        ^^^^^
+    )
+    ^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'mussel_input_files/populations.snps.genepop', 'mussel_input_files/results/popmap_corrected.csv', 'mussel_input_files/results/dapc']' returned non-zero exit status 1.
+2026-04-13 10:05:59,877 - INFO - Starting population genetics pipeline.
+2026-04-13 10:05:59,877 - INFO - Output directory: mussel_input_files/results
+2026-04-13 10:05:59,877 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-13 10:05:59,890 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:05:59,890 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-13 10:05:59,897 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:05:59,897 - INFO - Running DAPC...
+2026-04-13 10:05:59,898 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-13 10:07:21,624 - ERROR - Analysis failed while running an R script.
+Traceback (most recent call last):
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 362, in main
+    run_dapc(multi_snp_genepop, corrected_popmap, dirs["dapc"], scripts_dir, pop_colors_csv)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 173, in run_dapc
+    run_r_script(
+    ~~~~~~~~~~~~^
+        scripts_dir / "run_dapc.R",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        args,
+        ^^^^^
+    )
+    ^
+  File "/home/aliciak45/CompBio_Class/CodeProject/Pop-Gen-Pipe/Pop_script_2.py", line 142, in run_r_script
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aliciak45/miniforge3/envs/Pop-Gen-PipeEnv/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['Rscript', 'run_dapc.R', 'mussel_input_files/populations.snps.genepop', 'mussel_input_files/results/popmap_corrected.csv', 'mussel_input_files/results/dapc']' returned non-zero exit status 1.
+2026-04-13 10:11:59,716 - INFO - Starting population genetics pipeline.
+2026-04-13 10:11:59,717 - INFO - Output directory: mussel_input_files/results
+2026-04-13 10:11:59,717 - INFO - Validating popmap against multi-SNP genepop file: mussel_input_files/populations.snps.genepop
+2026-04-13 10:11:59,730 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:11:59,730 - INFO - Validating popmap against haplotype genepop file: mussel_input_files/populations.haps.genepop
+2026-04-13 10:11:59,737 - INFO - Wrote corrected popmap to: mussel_input_files/results/popmap_corrected.csv
+2026-04-13 10:11:59,737 - INFO - Running DAPC...
+2026-04-13 10:11:59,738 - INFO - Running command: Rscript run_dapc.R mussel_input_files/populations.snps.genepop mussel_input_files/results/popmap_corrected.csv mussel_input_files/results/dapc
+2026-04-13 10:13:21,273 - INFO - Running IBD...
+2026-04-13 10:13:21,274 - INFO - Running command: Rscript run_ibd.R mussel_input_files/fst.csv mussel_input_files/geo.csv mussel_input_files/results/ibd
+2026-04-13 10:13:23,772 - INFO - Running divMigrate...
+2026-04-13 10:13:23,772 - INFO - Using 1 thread(s) for divMigrate.
+2026-04-13 10:13:23,773 - INFO - Running command: Rscript run_divmigrate.R mussel_input_files/populations.snps.genepop mussel_input_files/results/divmigrate gst 1000 1
+2026-04-13 10:40:33,861 - INFO - Pipeline completed successfully.
