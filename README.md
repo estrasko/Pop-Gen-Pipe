@@ -136,7 +136,7 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 &emsp;- permutation test plot  
 &emsp;- summary statistics file  
 
-<img width="1400" height="1000" alt="amova_randtest_plot" src="https://github.com/user-attachments/assets/af89f71c-bd07-4160-83b7-f1ee126ad662" />
+<img width="50%" alt="amova_randtest_plot" src="https://github.com/user-attachments/assets/af89f71c-bd07-4160-83b7-f1ee126ad662" />
 
 ### 2. Discriminant Analysis of Principal Components (DAPC)
 
