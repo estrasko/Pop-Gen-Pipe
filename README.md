@@ -151,12 +151,12 @@ In DAPC, this color codes each populations with its own unique color. In divmigr
 
 &emsp;- assignment plot  
 
-<img width="50%" alt="dapc_scatter" src="https://github.com/user-attachments/assets/7883d913-dd89-4073-9828-c4e061cb0a96" />
+<img width="50%" alt="dapc_assignplot" src="https://github.com/user-attachments/assets/3347da76-126c-4a5b-aeae-f376edd36fb5" />
 
 
 &emsp;- scatter plot 
 
-<img width="50%" alt="dapc_scatter" src="https://github.com/user-attachments/assets/10e66e62-428f-415b-b98a-95675830d274" />
+<img width="50%" alt="dapc_scatter" src="https://github.com/user-attachments/assets/7883d913-dd89-4073-9828-c4e061cb0a96" />
 
 ### 3. Isolation by Distance (IBD)
 
